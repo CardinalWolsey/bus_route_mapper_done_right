@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
 var express = require('express');
 var app = express();
+
 var busRoutes = require(__dirname + '/routes/router');
 
-mongoose.connect('mongodb://localhost/busData'); 
+mongoose.connect('mongodb://localhost/busData');
 
 app.use('/api', busRoutes);
 
