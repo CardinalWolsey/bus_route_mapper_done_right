@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 var busRoutes = require(__dirname + '/routes/router');
 
-mongoose.connect('mongodb://localhost/'); //TODO insert path to db
+mongoose.connect('mongodb://localhost/busData'); 
 
 app.use('/api', busRoutes);
 
