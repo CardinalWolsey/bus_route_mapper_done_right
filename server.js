@@ -2,7 +2,12 @@ var mongoose = require('mongoose');
 var express = require('express');
 var app = express();
 
+var busRoutes = require(__dirname + '/routes/router');
 
-app.listen(process.env.PORT || 3000, function() {
-  console.log('server running');
-})
+mongoose.connect('mongodb://localhost/busData');
+
+app.use('/api', busRoutes);
+
+app.listen(3000, function() {
+  console.log('server listening on port 3000');
+});
