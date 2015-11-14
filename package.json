@@ -20,9 +20,12 @@
   "devDependencies": {
     "chai": "^3.4.1",
     "geojson-tools": "^0.2.1",
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "superagent": "^1.4.0"
   },
   "dependencies": {
+    "body-parser": "^1.14.1",
+    "geojson": "^0.2.1",
     "mongoose": "^4.2.5"
   }
 }
