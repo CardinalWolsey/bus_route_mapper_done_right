@@ -61,6 +61,6 @@ function onMapClick(e) {
 map.on('click', onMapClick);
 
 //for geojson data to be added
-var myLayer = L.geoJson().addTo(map);
-myLayer.addData(geojsonFeature);
+// var myLayer = L.geoJson().addTo(map);
+// myLayer.addData(geojsonFeature);
 
