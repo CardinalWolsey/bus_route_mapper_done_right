@@ -19,7 +19,7 @@ busRouter.post('/busroutes', bodyParser.json(), function(req, res) {
 });
 
 busRouter.get('/busroutes/:route_num', function(req, res) {
-  busRoute.find({"properties.RTE_NUM":"7"}, function(err, data) {
+  busRoute.find({"properties.RTE_NUM":req.params.route_num}, function(err, data) {
     if (err) return handleError(err, res);
 
     res.json(data);
