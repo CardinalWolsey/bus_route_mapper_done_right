@@ -19,12 +19,15 @@
   "homepage": "https://github.com/CardinalWolsey/bus_route_mapper_done_right#readme",
   "devDependencies": {
     "chai": "^3.4.1",
+    "chai-http": "^1.0.0",
     "geojson-tools": "^0.2.1",
     "mocha": "^2.3.3",
     "superagent": "^1.4.0"
   },
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.14.1",
+    "eat": "^0.1.1",
     "express": "^4.13.3",
     "mongoose": "^4.2.5"
   }
