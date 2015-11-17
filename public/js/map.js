@@ -19,7 +19,7 @@ function onLocationFound(e) {
   var radius = e.accuracy / 2;
 
   L.marker(e.latlng).addTo(map)
-    .bindPopup("You are within " + radius + " meters from this point").openPopup();
+    .bindPopup("You are within " + radius + " meters from here").openPopup();
 
   L.circle(e.latlng, radius).addTo(map);
 }
@@ -54,11 +54,13 @@ var popup = L.popup();
 function onMapClick(e) {
   popup
     .setLatLng(e.latlng)
-    .setContent("You clicked the map at " + e.latlng.toString())
+    .setContent("You clicked at " + e.latlng.toString())
     .openOn(map);
 }
 
 map.on('click', onMapClick);
+
+L.geoJson(geojsonFeature).addTo(map);
 
 //for geojson data to be added
 // var myLayer = L.geoJson().addTo(map);
