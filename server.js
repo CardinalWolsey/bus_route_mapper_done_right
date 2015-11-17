@@ -5,6 +5,7 @@ var busRoutes = require(__dirname + '/routes/busdata_routes');
 
 mongoose.connect('mongodb://localhost/busData');
 
+app.use(express.static('public'));
 app.use('/api', busRoutes);
 
 app.listen(3000, function() {

@@ -26,14 +26,17 @@ window.onload = function() {
     e.preventDefault();
     var routeNum = $('#route-number').val();
     console.log('it clicked');
-    $.get('localhost:3000/api/busroutes/' + routeNum, function(data) {
-      console.log(data);
+    $.ajax({
+        url: 'http://localhost:3000/api/busroutes/' + routeNum,
+        method: 'GET',
     })
+    .done(function(res) {
+      responseRoutes = res;
+      console.log(responseRoutes[0]);
+      L.geoJson(responseRoutes[0]).addTo(map);
+    });
 
-    // getRoutesData(routeNum);
-
-    // console.log(routeNum);
-  })
+  });
 
 
 // L.geoJson(geojsonFeature, {
