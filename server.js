@@ -6,6 +6,7 @@ var authRoutes = require(__dirname + '/routes/users_routes');
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/busData');
 
+app.use(express.static('public'));
 app.use('/api', busRoutes);
 app.use('/api', authRoutes)
 
