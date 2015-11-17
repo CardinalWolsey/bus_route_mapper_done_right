@@ -4,9 +4,7 @@ var app = express();
 var busRoutes = require(__dirname + '/routes/busdata_routes');
 var authRoutes = require(__dirname + '/routes/users_routes');
 
-mongoose.connect('mongodb://localhost/busData');
-// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/users');
-process.env.APP_SECRET = process.env.APP_SECRET || 'changemechangemechangeme';
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/busData');
 
 app.use('/api', busRoutes);
 app.use('/api', authRoutes)
