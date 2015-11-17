@@ -90,7 +90,7 @@ describe('bus routes', function() {
 
     it('should be able to remove a route', function(done) {
       chai.request('localhost:3000')
-        .delete('/api/routes/' + this.route._id)
+        .delete('/api/busroutes/' + this.route._id)
         .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res.body.msg).to.eql('successfully deleted route with delete method');
