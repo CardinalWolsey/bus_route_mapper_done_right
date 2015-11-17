@@ -31,6 +31,7 @@ window.onload = function() {
         method: 'GET',
     })
     .done(function(res) {
+      console.log('response from database recieved');
       responseRoutes = res;
       console.log(responseRoutes[0]);
       L.geoJson(responseRoutes[0]).addTo(map);
@@ -45,4 +46,4 @@ window.onload = function() {
 
 
 
-}
+};
