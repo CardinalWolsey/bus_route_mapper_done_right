@@ -53,6 +53,7 @@ window.onload = function() {
             onEachFeature: onEachFeature
           }).addTo(map).bindPopup(fullRouteNum);
 
+
           $('#selected-routes').append('<button>' + fullRouteNum + '</button>')
           console.log(responseRoutes[i]);
         }
@@ -69,12 +70,18 @@ window.onload = function() {
     });
   });
 
-  // //should clears all layered routes
-  // $('#clear-routes').on('click', function(e) {
-  //   e.preventDefault();
-  //   L.geoJson().removeLayer("564a19c90fcfdd7cda9fd0f3");
-  //   console.log('remove layer');
-  // });
+  //should clear all layered routes
+  $('#clear-routes').on('click', function(e) {
+    e.preventDefault();
+    var routeNum = $(this).text();
+    // console.log(geojson);
+    map.removeLayer(geojson);//removes previous submit
+    // routeDup.delete(routeNum);
+
+    // map.removeLayer("564a19c90fcfdd7cda9fcff4");//route 3
+    // console.log(geojson.getLayers(map));
+    // console.log('remove layer');
+  });
 
   // $('#selected-routes').on('click', function(e) {
   //   e.preventDefault();
