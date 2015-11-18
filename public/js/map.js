@@ -52,15 +52,16 @@ var popup = L.popup();
 
 //popup shows location via where clicked
 function onMapClick(e) {
-  popup
-    .setLatLng(e.latlng)
-    .setContent("You clicked at " + e.latlng.toString())
-    .openOn(map);
+  // popup
+    // .setLatLng(e.latlng)
+    // .setContent("You clicked at " + e.latlng.toString())
+    // .openOn(map);
 }
 
 map.on('click', onMapClick);
 
-L.geoJson(geojsonFeature).addTo(map);
+
+// L.geoJson(geojsonFeature).addTo(map);
 
 //for geojson data to be added
 // var myLayer = L.geoJson().addTo(map);
