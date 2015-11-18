@@ -114,4 +114,3 @@ function onEachFeature(feature, layer) {
     click: zoomToFeature
   });
 }
->>>>>>> master
