@@ -54,14 +54,6 @@ L.polygon([
 var popup = L.popup();
 
 //popup shows location via where clicked
-function onMapClick(e) {
-  // popup
-    // .setLatLng(e.latlng)
-    // .setContent("You clicked at " + e.latlng.toString())
-    // .openOn(map);
-}
-
-map.on('click', onMapClick);
 
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
