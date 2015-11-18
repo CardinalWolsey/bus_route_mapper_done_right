@@ -64,6 +64,7 @@ function onMapClick(e) {
 map.on('click', onMapClick);
 
 
+
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -74,14 +75,50 @@ var busColor = [
   '#FFFF00',//yellow
   '#2FDE00',//lime green
   '#0000BF',//blue
-  '#210026' //purple
+  '#4B2E83', //dark purple
+  '#210026', //purple
 ];
 
+var newColor  = [
+  {inUse: false, "color": "#FF0000"},
+  {inUse: false, "color": "#FFFF00"},
+  {inUse: false, "color": "#2FDE00"},
+  {inUse: false, "color": "#0000BF"},
+  {inUse: false, "color": "#210026"}
+];
 
-//gets random color from bus color palette
+// function chooseColor (colorArray) {
+//   for (var i = 0; i < colorArray.length; i++) {
+//     if (colorArray[i].inUse === false) {
+//       colorArray[i].inUse = true;
+//       return colorArray[i].color;
+//     }
+//   };
+//   return "#000000";
+// }
+
+// function(color) {
+//   for (var i = 0; i < colorArray.length; i++) {
+//     if (this.colorArray[i].color == color) {
+//       this.colorArray[i].inUse = false;
+//     }
+//   };
+// }
+
+
+// //gets random color from bus color palette
+// function style() {
+//     return {
+//         color: busColor[getRandom(0, busColor.length)],
+//         weight: 4,
+//         opacity: 1,
+//         fillOpacity: 0.7
+//     };
+// }
+
 function style() {
     return {
-        color: busColor[getRandom(0, busColor.length)],
+        // color: chooseColor(newColor),
         weight: 4,
         opacity: 1,
         fillOpacity: 0.7
@@ -95,7 +132,8 @@ function highlightRoute(e) {
 
     layer.setStyle({
         weight: 7,
-        color: '#4B2E83',
+        color: busColor[getRandom(0, busColor.length)],
+        // color: '#4B2E83',
         dashArray: '',
         fillOpacity: 0.7
     });

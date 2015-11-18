@@ -2,15 +2,9 @@ window.onload = function() {
 
   var routeDup = new Set();
 
-
+  var layerArray = [];
   // var color = require(__dirname + '/../../lib/bus_color');
-  // var newColor  = [
-  //   {"color": "#FF0000"},
-  //   {"color": "#FFFF00"},
-  //   {"color": "#2FDE00"},
-  //   {"color": "#0000BF"},
-  //   {"color": "#210026"}
-  // ];
+
 
   // var color  = [
   //   {"color": "#00FFEA"},
@@ -28,7 +22,7 @@ window.onload = function() {
 
   $('#route-submit').on('click', function(e) {
     e.preventDefault();
-    var routeNum = $('#route-number').val();
+    var routeNum = $('#input-route').val();
     console.log('it clicked');
     $.ajax({
         url: 'http://localhost:3000/api/busroutes/' + routeNum,
@@ -44,18 +38,14 @@ window.onload = function() {
         if (!routeDup.has(fullRouteNum)) {
           routeDup.add(fullRouteNum);
 
-
-          // ids = responseRoutes[i]._id;
-
           //makes layer on map
           geojson = L.geoJson(responseRoutes[i], {
             style: style,
             onEachFeature: onEachFeature
           }).addTo(map).bindPopup(fullRouteNum);
 
-
-          $('#selected-routes').append('<button>' + fullRouteNum + '</button>')
-          console.log(responseRoutes[i]);
+          layerArray.push(geojson);
+          $('#selected-routes').append('<li id="route-number" class="' +  fullRouteNum + '">' + fullRouteNum + '</li>')
         }
 
         // sets view
@@ -64,28 +54,25 @@ window.onload = function() {
       };
 
 
-      // showRoutes(responseRoutes);
-      // responseRoutes.forEach(route) {
-      // }
+      console.log(layerArray);
     });
   });
 
-  //should clear all layered routes
+
+  //clears all layered routes
   $('#clear-routes').on('click', function(e) {
     e.preventDefault();
-    var routeNum = $(this).text();
-    // console.log(geojson);
-    map.removeLayer(geojson);//removes previous submit
-    // routeDup.delete(routeNum);
-
-    // map.removeLayer("564a19c90fcfdd7cda9fcff4");//route 3
-    // console.log(geojson.getLayers(map));
-    // console.log('remove layer');
+    routeDup.clear()
+    layerArray.forEach(function(element, index, array) {
+      array[index].clearLayers();
+    });
+    layerArray.length = 0;
+    $('#selected-routes').empty();
   });
 
-  // $('#selected-routes').on('click', function(e) {
+  // $('#selected-routes:number').on('click', function(e) {
   //   e.preventDefault();
-  //   console.log('it clicked');
+  //   console.log('clicked to remove');
   //   $.ajax({
   //       url: 'http://localhost:3000/api/busroutes/' + routeNum,
   //       method: 'GET',
@@ -106,12 +93,6 @@ window.onload = function() {
   //   });
 
   // });
-
-
-// L.geoJson(geojsonFeature, {
-//     onEachFeature: onEachFeature
-// }).addTo(map);
-
 
 
 };
