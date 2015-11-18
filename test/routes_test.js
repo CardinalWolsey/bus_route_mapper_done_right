@@ -98,6 +98,6 @@ describe('bus routes', function() {
         });
     });
 
-    it('should be able to patch a route');
+    // it('should be able to patch a route');
   });
 });
