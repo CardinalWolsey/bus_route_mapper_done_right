@@ -3,6 +3,41 @@ window.onload = function() {
   var routeDup = new Set();
   var layerArray = [];
 
+  function getNearBusRoutes(radius) {
+    $.ajax ({
+      url: 'http://localhost:3000/api/nearbusroutes/' ,
+      type: 'GET',
+      data: {
+        lng: lng,
+        lat: lat,
+        radius: radius
+      }
+    })
+    .done(function(res) {
+      console.log('done');
+      for (var i = 0; i < res.length; i++) {
+        var fullRouteNum = res[i].properties.ROUTE;
+        if (!routeDup.has(fullRouteNum)) {
+          routeDup.add(fullRouteNum);
+
+          //makes layer on map
+          geojson = L.geoJson(res[i], {
+            style: style,
+            onEachFeature: onEachFeature
+            // zoomToFeature
+          }).addTo(map).bindPopup(fullRouteNum);
+          layerArray.push(geojson);
+
+          $('#selected-routes').append('<button id="route-number" class="' +  fullRouteNum + '">' + fullRouteNum + '</button>')
+        }
+
+      }
+    })
+    .fail(function(err) {
+      console.log(err);
+    });
+  }
+
   //User inputs route number and map displays paths
   $('#route-submit').on('click', function(e) {
     e.preventDefault();
@@ -22,6 +57,7 @@ window.onload = function() {
           geojson = L.geoJson(res[i], {
             style: style,
             onEachFeature: onEachFeature
+            // zoomToFeature
           }).addTo(map).bindPopup(fullRouteNum);
           layerArray.push(geojson);
 
@@ -42,5 +78,9 @@ window.onload = function() {
     $('#selected-routes').empty();
   });
 
+  $('#map').on('click', '#nearButton', function() {
+    console.log('button clicked!');
+    getNearBusRoutes(200);
+  });
 
 };
