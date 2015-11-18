@@ -63,84 +63,45 @@ function onMapClick(e) {
 
 map.on('click', onMapClick);
 
-
-
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-
 var busColor = [
-  '#FF0000',//red
-  '#FFFF00',//yellow
-  '#2FDE00',//lime green
-  '#0000BF',//blue
-  '#4B2E83', //dark purple
+  '#FF0000', //red
+  '#FF7B00', //orange
+  '#F6C905', //yellow
+  '#2FDE00', //lime green
+  '#03A76E', //turquoise
+  '#0498D8', //sky blue
+  '#0000BF', //blue
+  '#FF0057', //pink
   '#210026', //purple
+  '#000000', //black
 ];
-
-var newColor  = [
-  {inUse: false, "color": "#FF0000"},
-  {inUse: false, "color": "#FFFF00"},
-  {inUse: false, "color": "#2FDE00"},
-  {inUse: false, "color": "#0000BF"},
-  {inUse: false, "color": "#210026"}
-];
-
-// function chooseColor (colorArray) {
-//   for (var i = 0; i < colorArray.length; i++) {
-//     if (colorArray[i].inUse === false) {
-//       colorArray[i].inUse = true;
-//       return colorArray[i].color;
-//     }
-//   };
-//   return "#000000";
-// }
-
-// function(color) {
-//   for (var i = 0; i < colorArray.length; i++) {
-//     if (this.colorArray[i].color == color) {
-//       this.colorArray[i].inUse = false;
-//     }
-//   };
-// }
-
-
-// //gets random color from bus color palette
-// function style() {
-//     return {
-//         color: busColor[getRandom(0, busColor.length)],
-//         weight: 4,
-//         opacity: 1,
-//         fillOpacity: 0.7
-//     };
-// }
 
 function style() {
-    return {
-        // color: chooseColor(newColor),
-        weight: 4,
-        opacity: 1,
-        fillOpacity: 0.7
-    };
+  return {
+    weight: 4,
+    opacity: 1,
+    fillOpacity: 0.7
+  };
 }
-
 
 //to highlight hovered route
 function highlightRoute(e) {
-    var layer = e.target;
+  var layer = e.target;
 
-    layer.setStyle({
-        weight: 7,
-        color: busColor[getRandom(0, busColor.length)],
-        // color: '#4B2E83',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
+  layer.setStyle({
+    weight: 7,
+    color: busColor[getRandom(0, busColor.length)],
+    dashArray: '',
+    fillOpacity: 0.7
+  });
 
-    if (!L.Browser.ie && !L.Browser.opera) {
-        layer.bringToFront();
-    }
+  if (!L.Browser.ie && !L.Browser.opera) {
+    layer.bringToFront();
+  }
 }
 
 //resets after finished hovering
@@ -150,21 +111,14 @@ function resetHighlight(e) {
 
 //zooms in or out depending on the selected route
 function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
+  map.fitBounds(e.target.getBounds());
 }
 
+//summarizes events on geoJson layer
 function onEachFeature(feature, layer) {
   layer.on({
-      mouseover: highlightRoute,
-      mouseout: resetHighlight,
-      click: zoomToFeature
+    mouseover: highlightRoute,
+    mouseout: resetHighlight,
+    click: zoomToFeature
   });
 }
-
-
-// L.geoJson(geojsonFeature).addTo(map);
-
-//for geojson data to be added
-// var myLayer = L.geoJson().addTo(map);
-// myLayer.addData(geojsonFeature);
-
