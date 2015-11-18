@@ -9,9 +9,9 @@
 
 This is a project for the JavaScript Full-Stack Development Accelerator at Code Fellows.
 
-The API will takes GET request for a route number in the King County Metro Transit System's transportaion network and returns a geojson object for displaying that route on a map.
+The API takes a GET request for a route number in the King County Metro Transit System's transportation network and returns a geojson object for displaying that route on a map.
 
-The API will also take a GET request for a location in lng/lat and a radius for the search and return a geojson array of all the bus routes that come within the given radius of the given location.
+The API also takes a GET request for a location in lng/lat and a radius for the search and returns a geojson array of all the bus routes that come within the given radius of the given location.
 
 A simple front-end to demonstrate the API can be found at http://bus-route-mapper.herokuapp.com
 
@@ -21,10 +21,10 @@ A simple front-end to demonstrate the API can be found at http://bus-route-mappe
 Make a GET request to
 
 ```
-http://bus-route-mapper.herokuapp.com/api/busroutes/7
+http://bus-route-mapper.herokuapp.com/api/busroutes/[bus_route_number]
 ```  
 
-The response will be an array of geojson objects of all the bus routes under King County Metro with that route number.  This will return more than one geojson object in the array, as multiple service types are listed under one route number.  For example, for route 7 there is a 7AS, 7AT, 7AZ, and 7AN service types.  The API will return all of these separate routes in the array.
+The response will be an array of geojson objects of all the bus routes under King County Metro with that route number.  This will return more than one geojson object in the array, as multiple service types are listed under one route number.  For example, for route 7 there are 7AS, 7AT, 7AZ, and 7AN service types.  The API will return all of these separate routes in the array.
 
 #### Example Response
 (The geometry property has been suppressed for brevity and clarity)
@@ -99,6 +99,7 @@ http://bus-route-mapper.herokuapp.com/api/nearbusroutes/?lng=-122.31&lat=47.6244
 This will return an array of geojson bus route objects that cross within the given radius (in meters) of the given location.  The sample query above will return all bus routes that pass within 200 meters of 47.6244° N, 122.31° W.
 
 #### Example Response
+(The geometry property has been suppressed for brevity and clarity)
 
 ```
 [
