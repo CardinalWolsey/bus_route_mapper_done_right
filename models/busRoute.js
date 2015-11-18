@@ -10,8 +10,7 @@ var busRouteSchema = new mongoose.Schema({
     Shape_len: Number
   },
   geometry: {
-    type: [],
-    // type: {type: String, default: "MultiLineString", required: true},
+    type: {type: String, default: "MultiLineString", required: true},
     coordinates: {type: Array, required: true}
   }
 }, {collection: 'routes'});
