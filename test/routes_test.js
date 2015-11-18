@@ -29,7 +29,7 @@ describe('bus routes', function() {
       },
       geometry: {
         type: "MultiLineString",
-        coordinates: [[0,0], [1,1]]
+        coordinates: [[[0,0],[0,20],[10,30],[20,20],[20,0],[0,0]]]
       }
 
     };
@@ -69,7 +69,7 @@ describe('bus routes', function() {
         },
         geometry: {
           type: "MultiLineString",
-          coordinates: [[0,0], [1,1]]
+          coordinates: [[[0,0],[0,20],[10,30],[20,20],[20,0],[0,0]]]
       }})).save(function(err, data) {
         expect(err).to.eql(null);
         this.route = data;
