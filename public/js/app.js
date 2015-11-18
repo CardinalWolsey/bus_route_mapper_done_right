@@ -1,16 +1,25 @@
 window.onload = function() {
 
   var routeDup = new Set();
-  // var color = {"color": "#FF0000"};
+
 
   // var color = require(__dirname + '/../../lib/bus_color');
-  var color  = [
-    {"color": "#FF0000"},
-    {"color": "#FFFF00"},
-    {"color": "#2FDE00"},
-    {"color": "#0000BF"},
-    {"color": "#210026"}
-  ]
+  // var newColor  = [
+  //   {"color": "#FF0000"},
+  //   {"color": "#FFFF00"},
+  //   {"color": "#2FDE00"},
+  //   {"color": "#0000BF"},
+  //   {"color": "#210026"}
+  // ];
+
+  // var color  = [
+  //   {"color": "#00FFEA"},
+  //   {"color": "#00BDE8"},
+  //   {"color": "#008DFF"},
+  //   {"color": "#0044E8"},
+  //   {"color": "#0007FF"}
+  // ];
+
 
   // console.log(color)
 
@@ -19,7 +28,6 @@ window.onload = function() {
 
   $('#route-submit').on('click', function(e) {
     e.preventDefault();
-    // color = 'style' + click;
     var routeNum = $('#route-number').val();
     console.log('it clicked');
     $.ajax({
@@ -37,12 +45,12 @@ window.onload = function() {
           routeDup.add(fullRouteNum);
 
 
-          // L.geoJson(responseRoutes[i]).addTo(map).bindPopup(fullRouteNum);
           // ids = responseRoutes[i]._id;
 
-          //can be used to change the color
-          L.geoJson(responseRoutes[i], {
-            style: color[i]
+          //makes layer on map
+          geojson = L.geoJson(responseRoutes[i], {
+            style: style,
+            onEachFeature: onEachFeature
           }).addTo(map).bindPopup(fullRouteNum);
 
           $('#selected-routes').append('<button>' + fullRouteNum + '</button>')

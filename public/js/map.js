@@ -14,6 +14,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18
 }).addTo(map);
 
+//for eventlisteners to use
+var geojson;
+
 //finds and centers where current location is
 function onLocationFound(e) {
   var radius = e.accuracy / 2;
@@ -59,6 +62,66 @@ function onMapClick(e) {
 }
 
 map.on('click', onMapClick);
+
+
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+
+var busColor = [
+  '#FF0000',//red
+  '#FFFF00',//yellow
+  '#2FDE00',//lime green
+  '#0000BF',//blue
+  '#210026' //purple
+];
+
+
+//gets random color from bus color palette
+function style() {
+    return {
+        color: busColor[getRandom(0, busColor.length)],
+        weight: 4,
+        opacity: 1,
+        fillOpacity: 0.7
+    };
+}
+
+
+//to highlight hovered route
+function highlightRoute(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 7,
+        color: '#4B2E83',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera) {
+        layer.bringToFront();
+    }
+}
+
+//resets after finished hovering
+function resetHighlight(e) {
+  geojson.resetStyle(e.target);
+}
+
+//zooms in or out depending on the selected route
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}
+
+function onEachFeature(feature, layer) {
+  layer.on({
+      mouseover: highlightRoute,
+      mouseout: resetHighlight,
+      click: zoomToFeature
+  });
+}
 
 
 // L.geoJson(geojsonFeature).addTo(map);
