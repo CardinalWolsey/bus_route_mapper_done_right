@@ -1,4 +1,4 @@
-# King Country Bus Route API
+# King County Bus Route API
 
 **Spencer Caldwell**   
 **Matthew Ringel**  
