@@ -1,17 +1,16 @@
 window.onload = function() {
 
   var routeDup = new Set();
-
+  // var color = {"color": "#FF0000"};
 
   // var color = require(__dirname + '/../../lib/bus_color');
-  var click = 0;
-  // var color  = {
-  //     zero : {"color": "#FF0000"},
-  //     1 : {"color": "#FFFF00"},
-  //     2 : {"color": "#2FDE00"},
-  //     3 : {"color": "#0000BF"},
-  //     4 : {"color": "#210026"}
-  // }
+  var color  = [
+    {"color": "#FF0000"},
+    {"color": "#FFFF00"},
+    {"color": "#2FDE00"},
+    {"color": "#0000BF"},
+    {"color": "#210026"}
+  ]
 
   // console.log(color)
 
@@ -39,11 +38,11 @@ window.onload = function() {
 
 
           // L.geoJson(responseRoutes[i]).addTo(map).bindPopup(fullRouteNum);
-          ids = responseRoutes[i]._id;
+          // ids = responseRoutes[i]._id;
 
           //can be used to change the color
           L.geoJson(responseRoutes[i], {
-              // style: color
+            style: color[i]
           }).addTo(map).bindPopup(fullRouteNum);
 
           $('#selected-routes').append('<button>' + fullRouteNum + '</button>')
@@ -62,12 +61,12 @@ window.onload = function() {
     });
   });
 
-  //should clears all layered routes
-  $('#clear-routes').on('click', function(e) {
-    e.preventDefault();
-    L.geoJson().removeLayer("564a19c90fcfdd7cda9fd0f3");
-    console.log('remove layer');
-  });
+  // //should clears all layered routes
+  // $('#clear-routes').on('click', function(e) {
+  //   e.preventDefault();
+  //   L.geoJson().removeLayer("564a19c90fcfdd7cda9fd0f3");
+  //   console.log('remove layer');
+  // });
 
   // $('#selected-routes').on('click', function(e) {
   //   e.preventDefault();
