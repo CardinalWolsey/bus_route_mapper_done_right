@@ -42,4 +42,5 @@ window.onload = function() {
     $('#selected-routes').empty();
   });
 
+
 };
