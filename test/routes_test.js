@@ -31,8 +31,8 @@ describe('bus routes', function() {
         Shape_len: 1
       },
       geometry: {
-        type: "MultiLineString",
-        coordinates: [[0,0], [1,1]]
+        type: "LineString",
+        coordinates: [ [ -122.249571045878781, 47.6112335962925 ], [ -122.226014708001799, 47.596727964758841 ] ]
       }
 
     };
@@ -47,15 +47,14 @@ describe('bus routes', function() {
       });
   });
 
-//need to create an 'it should be able to get all routes' test
-// do we want a route that gets all bus routes?
-
   it('should be able to get one of the bus routes', function(done) {
     chai.request('localhost:3000')
       .get('/api/busroutes/999')
       .end(function(err, res) {
         expect(err).to.eql(null);
         expect(Array.isArray(res.body)).to.eql(true);
+        var routeArray = res.body;
+        expect(routeArray[0].properties.ROUTE).to.eql('999');
         done();
       });
   });
@@ -71,8 +70,8 @@ describe('bus routes', function() {
           Shape_len: 1
         },
         geometry: {
-          type: "MultiLineString",
-          coordinates: [[0,0], [1,1]]
+          type: "LineString",
+          coordinates: [ [ -122.249571045878781, 47.6112335962925 ], [ -122.226014708001799, 47.596727964758841 ] ]
       }})).save(function(err, data) {
         expect(err).to.eql(null);
         this.route = data;
@@ -101,7 +100,19 @@ describe('bus routes', function() {
         });
     });
 
-    // it('should be able to patch a route');
+    it('should be able to find nearby routes', function(done) {
+      chai.request('localhost:3000')
+        .get('/api/nearbusroutes/?lng=-122.249&lat=47.611&radius=400')
+        // .send({lng: 47.611, lat: -122.249, radius: 400})
+        // there should be a way to do this without putting it into the
+        // actual url, right?
+        .end(function(err, res) {
+          expect(err).to.eql(null);
+          expect(Array.isArray(res.body)).to.eql(true);
+          done();
+        });
+    });
+
   });
 
 });

@@ -10,9 +10,11 @@ var busRouteSchema = new mongoose.Schema({
     Shape_len: Number
   },
   geometry: {
-    type: {type: String, default: "MultiLineString", required: true},
+    type: {type: String, required: true},
     coordinates: {type: Array, required: true}
   }
 }, {collection: 'routes'});
+
+busRouteSchema.index({ geometry : '2dsphere' });
 
 module.exports = mongoose.model('busRoute', busRouteSchema);
