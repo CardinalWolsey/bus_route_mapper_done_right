@@ -10,6 +10,9 @@ var mongoose = require('mongoose');
 //need to define the Route constructor to match how routes are formatted in the county data
 var Route = require(__dirname + '/../models/busRoute');
 
+
+
+
 describe('bus routes', function() {
   after(function(done) {
     mongoose.connection.db.dropDatabase(function() {
@@ -17,7 +20,7 @@ describe('bus routes', function() {
     });
   });
 
-//This is a test outline.  Need to finish and integrate
+  //This is a test outline.  Need to finish and integrate
   it('should be able to create a route', function(done) {
     var routeData = {
       type: "Feature",
@@ -100,6 +103,5 @@ describe('bus routes', function() {
 
     // it('should be able to patch a route');
   });
-  describe()
-  it('should test if near by routes was gotten')
+
 });
