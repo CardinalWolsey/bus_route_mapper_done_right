@@ -14,12 +14,15 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18
 }).addTo(map);
 
+//for eventlisteners to use
+var geojson;
+
 //finds and centers where current location is
 function onLocationFound(e) {
   var radius = e.accuracy / 2;
 
   L.marker(e.latlng).addTo(map)
-    .bindPopup("You are within " + radius + " meters from this point").openPopup();
+    .bindPopup("You are within " + radius + " meters from here").openPopup();
 
   L.circle(e.latlng, radius).addTo(map);
 }
@@ -34,33 +37,66 @@ map.on('locationerror', onLocationError);
 
 map.locate({setView: true, maxZoom: 13});
 
-//able to make circle
-L.circle([51.508, -0.11], 500, {
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}) // .addTo(map).bindPopup("I am a circle.");
-
-//able to make polygon
-L.polygon([
-  [51.509, -0.08],
-  [51.503, -0.06],
-  [51.51, -0.047]
-])// .addTo(map).bindPopup("I am a polygon.");
-
 var popup = L.popup();
-
-//popup shows location via where clicked
-function onMapClick(e) {
-  popup
-    .setLatLng(e.latlng)
-    .setContent("You clicked the map at " + e.latlng.toString())
-    .openOn(map);
-}
 
 map.on('click', onMapClick);
 
-//for geojson data to be added
-// var myLayer = L.geoJson().addTo(map);
-// myLayer.addData(geojsonFeature);
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
+var busColor = [
+  '#FF0000', //red
+  '#FF7B00', //orange
+  '#F6C905', //yellow
+  '#2FDE00', //lime green
+  '#03A76E', //turquoise
+  '#0498D8', //sky blue
+  '#0000BF', //blue
+  '#FF0057', //pink
+  '#210026', //purple
+  '#000000', //black
+];
+
+function style() {
+  return {
+    weight: 4,
+    opacity: 1,
+    fillOpacity: 0.7
+  };
+}
+
+//to highlight hovered route
+function highlightRoute(e) {
+  var layer = e.target;
+
+  layer.setStyle({
+    weight: 7,
+    color: busColor[getRandom(0, busColor.length)],
+    dashArray: '',
+    fillOpacity: 0.7
+  });
+
+  if (!L.Browser.ie && !L.Browser.opera) {
+    layer.bringToFront();
+  }
+}
+
+//resets after finished hovering
+function resetHighlight(e) {
+  geojson.resetStyle(e.target);
+}
+
+//zooms in or out depending on the selected route
+function zoomToFeature(e) {
+  map.fitBounds(e.target.getBounds());
+}
+
+//summarizes events on geoJson layer
+function onEachFeature(feature, layer) {
+  layer.on({
+    mouseover: highlightRoute,
+    mouseout: resetHighlight,
+    click: zoomToFeature
+  });
+}

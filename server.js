@@ -7,10 +7,14 @@ process.env.APP_SECRET = process.env.APP_SECRET || 'changemechangemechangeme';
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/busData');
 
+
 // process.env.APP_SECRET = process.env.APP_SECRET || 'changemechangemechangeme';
 
+
+app.use(express.static('public'));
+
 app.use('/api', busRoutes);
-app.use('/api', authRoutes)
+app.use('/api', authRoutes);
 
 app.listen(3000, function() {
   console.log('server listening on port 3000');
