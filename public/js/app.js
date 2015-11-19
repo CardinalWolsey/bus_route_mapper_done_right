@@ -25,7 +25,7 @@ window.onload = function() {
 
   function getNearBusRoutes(radius) {
     $.ajax ({
-      url: 'http://localhost:3000/api/nearbusroutes/' ,
+      url: 'http://bus-route-mapper.herokuapp.com/api/nearbusroutes/' ,
       type: 'GET',
       data: {
         lng: lng,
@@ -46,7 +46,7 @@ window.onload = function() {
     e.preventDefault();
     var routeNum = $('#input-route').val();
     $.ajax({
-        url: 'http://localhost:3000/api/busroutes/' + routeNum,
+        url: 'http://bus-route-mapper.herokuapp.com/api/busroutes/' + routeNum,
         method: 'GET',
     })
     .done(function(res) {
