@@ -14,20 +14,21 @@
     <header>
       <h1>Bus Route Mapper</h1>
     </header>
-    <article id="map">
-    </article>
-    <article>
-      <form id="route-selection">
-        <label>Input a Route Number</label>
-        <input type="number" id="input-route"></input>
-        <button id="route-submit">SUBMIT</button>
-      </form>
-
-      <section >
-        <label id="selected-routes">Routes Displayed:</label>
-      </section>
+    <div id="map">
+    </div>
+    <article class="route-interaction" >
+      <section id="input">
+        <form id="route-selection">
+          <label>Input a Route Number</label>
+          <input type="number" id="input-route"></input>
+          <button id="route-submit" class="submit">SUBMIT</button>
+          <button id="clear-routes" class="clear">CLEAR ALL ROUTES</button>
+        </form>
       <section>
-        <button id="clear-routes">CLEAR ALL ROUTES</button>
+      </section>
+      </section>
+      <section class="display">
+        <label id="selected-routes">Routes Displayed:</label>
       </section>
     </article>
 
@@ -60,4 +61,5 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script type="text/javascript" src ="js/app.js"></script>
   <script type="text/javascript" src="js/map.js"></script>
+  <script type="text/javascript" src="js/nearbusroutes.js"></script>
 </html>
