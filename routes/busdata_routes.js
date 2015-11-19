@@ -10,7 +10,7 @@ var eatAuth = require(__dirname + '/../lib/eat_auth');
 
 var busRouter = module.exports = exports = express.Router();
 
-busRouter.post('/busroutes', bodyParser.json(), eatAuth(), function(req, res) {
+busRouter.post('/busroutes', bodyParser.json(), eatAuth, function(req, res) {
   console.log('post request recieved');
   var newBusRoute = new busRoute(req.body);
   newBusRoute.save(function(err, data) {
