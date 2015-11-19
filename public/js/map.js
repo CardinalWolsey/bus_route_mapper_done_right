@@ -106,8 +106,11 @@ function zoomToFeature(e) {
 //summarizes events on geoJson layer
 function onEachFeature(feature, layer) {
   layer.on({
+    click: highlightRoute,
     mouseover: highlightRoute,
     mouseout: resetHighlight,
+  });
+  layer.on({
     click: zoomToFeature
   });
   // does this feature have a property named popupContent?
@@ -116,6 +119,7 @@ function onEachFeature(feature, layer) {
   }
 }
 
+//adds
 function mapDisplay(route) {
   L.geoJson(route, {
     style: style,
