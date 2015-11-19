@@ -1,6 +1,7 @@
 var map = L.map('map');
 //for eventlisteners and location to use
 var geojson, lng, lat;
+var popup = L.popup();
 
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibXJpbmdlbCIsImEiOiJjaWd5bmljcm4wdmk2dmttNXg1ZGd3ODM5In0.GbAVcFSt6FWimnWc0XvsLw', {
 //   maxZoom: 18,
@@ -50,25 +51,6 @@ function onMapClick(e) {
 
 map.on('click', onMapClick);
 
-
-
-//able to make circle
-L.circle([51.508, -0.11], 500, {
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}) // .addTo(map).bindPopup("I am a circle.");
-
-//able to make polygon
-L.polygon([
-  [51.509, -0.08],
-  [51.503, -0.06],
-  [51.51, -0.047]
-])// .addTo(map).bindPopup("I am a polygon.");
-
-var popup = L.popup();
-
-//popup shows location via where clicked
 
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
