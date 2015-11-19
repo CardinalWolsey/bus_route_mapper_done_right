@@ -1,6 +1,7 @@
 var map = L.map('map');
 //for eventlisteners and location to use
 var geojson, lng, lat;
+var popup = L.popup();
 
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibXJpbmdlbCIsImEiOiJjaWd5bmljcm4wdmk2dmttNXg1ZGd3ODM5In0.GbAVcFSt6FWimnWc0XvsLw', {
 //   maxZoom: 18,
@@ -50,8 +51,6 @@ function onMapClick(e) {
 }
 
 map.on('click', onMapClick);
-
-var popup = L.popup();
 
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;

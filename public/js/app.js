@@ -19,9 +19,9 @@ window.onload = function() {
         layerArray.push(geojson);
 
         $('#selected-routes').append('<span id="route-number" class="' +  fullRouteNum + '">' + fullRouteNum + '</span>');
-      };
-    };
-  };
+      }
+    }
+  }
 
   function getNearBusRoutes(radius) {
     $.ajax ({
@@ -34,7 +34,7 @@ window.onload = function() {
       }
     })
     .done(function(res) {
-      ajaxDone(res)
+      ajaxDone(res);
     })
     .fail(function(err) {
       console.log(err);
@@ -74,12 +74,5 @@ window.onload = function() {
     console.log('button clicked!');
     getNearBusRoutes(200);
   });
-
-  // function clickSpecificRoute (array) {
-  //   array.forEach(function(element, index, array) {
-  //     if(layerArray[index] ==
-  //   });
-  // }
-  // $('.'+layerArray)
 
 };
