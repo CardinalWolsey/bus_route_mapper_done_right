@@ -16,18 +16,19 @@
     </header>
     <div id="map">
     </div>
-    <article>
-      <form id="route-selection">
-        <label>Input a Route Number</label>
-        <input type="number" id="input-route"></input>
-        <button id="route-submit">SUBMIT</button>
-      </form>
-
-      <section >
-        <label id="selected-routes">Routes Displayed:</label>
-      </section>
+    <article class="route-interaction" >
+      <section id="input">
+        <form id="route-selection">
+          <label>Input a Route Number</label>
+          <input type="number" id="input-route"></input>
+          <button id="route-submit" class="submit">SUBMIT</button>
+          <button id="clear-routes" class="clear">CLEAR ALL ROUTES</button>
+        </form>
       <section>
-        <button id="clear-routes">CLEAR ALL ROUTES</button>
+      </section>
+      </section>
+      <section class="display">
+        <label id="selected-routes">Routes Displayed:</label>
       </section>
     </article>
 

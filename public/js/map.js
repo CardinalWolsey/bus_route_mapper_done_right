@@ -134,31 +134,10 @@ function onEachFeature(feature, layer) {
   }
 }
 
-// function getNearBusRoutes(radius) {
-//   $.ajax ({
-//     url: 'http://localhost:3000/api/nearbusroutes/',
-//     type: 'GET',
-//     data: {
-//       lng: lng,
-//       lat: lat,
-//       radius: radius
-//     }
-//   })
-//   .done(function(res) {
-//     for (var i = 0; i < res.length; i++) {
-//       mapDisplay(res[i]);
-//     }
-//   })
-//   .fail(function(err) {
-//     console.log(err);
-//   });
-// }
-
 function mapDisplay(route) {
   L.geoJson(route, {
     style: style,
     onEachFeature: onEachFeature
   }).addTo(map);
 }
-
 

@@ -18,7 +18,7 @@ window.onload = function() {
         }).addTo(map).bindPopup(fullRouteNum);
         layerArray.push(geojson);
 
-        $('#selected-routes').append('<button id="route-number" class="' +  fullRouteNum + '">' + fullRouteNum + '</button>');
+        $('#selected-routes').append('<span id="route-number" class="' +  fullRouteNum + '">' + fullRouteNum + '</span>');
       };
     };
   };
@@ -60,17 +60,26 @@ window.onload = function() {
   //clears all layered routes
   $('#clear-routes').on('click', function(e) {
     e.preventDefault();
-    routeDup.clear()
+    routeDup.clear();
     layerArray.forEach(function(element, index, array) {
       array[index].clearLayers();
     });
     layerArray.length = 0;
     $('#selected-routes').empty();
+    $('.display').prepend('<label id="selected-routes">Routes Displayed:</label>');
   });
 
+  //checks and displays nearby routes
   $('#map').on('click', '#nearButton', function() {
     console.log('button clicked!');
     getNearBusRoutes(200);
   });
+
+  // function clickSpecificRoute (array) {
+  //   array.forEach(function(element, index, array) {
+  //     if(layerArray[index] ==
+  //   });
+  // }
+  // $('.'+layerArray)
 
 };
