@@ -6,6 +6,7 @@ var basicHttp = require(__dirname + '/../lib/basic_http_authentication');
 
 var authRouter = module.exports = exports = express.Router();
 
+//include token generation in here with generateToken
 authRouter.post('/signup', jsonParser, function(req, res) {
   var user = new User();
   user.auth.basic.username = req.body.username;
@@ -14,10 +15,17 @@ authRouter.post('/signup', jsonParser, function(req, res) {
 
   user.save(function(err, data) {
     if (err) return handleError(err, res);
-    res.json({msg: 'user created'});
+
+    user.generateToken(function(err, token) {
+      if (err) return handleError(err, res);
+
+      res.json({token: token});
+    });
   });
 });
 
+
+//include generateToken
 authRouter.get('/signin', basicHttp, function(req, res) {
   if (!(req.auth.username && req.auth.password)) {
     console.log('no basic auth provided');
@@ -40,74 +48,29 @@ authRouter.get('/signin', basicHttp, function(req, res) {
       return res.status(401).json({msg: 'authenticat says no'});
     }
 
-    res.json({msg: 'authentiCat has determined that you are you, but be warry because auth is tough'});
+    user.generateToken(function(err, token) {
+      if (err) return handleError(err, res);
+
+      res.json({token: token})
+    });
   });
 });
 
 
-
-
-
-//put in basicHttp on next line
-// usersRouter.get('/signin', function(req, res) {
-//   User.findOne({'basic.username': req.auth.username}, function(err, user) {
+// //added code
+// usersRouter.post('/signup', jsonParser, function(req, res) {
+//   var newUser = new User();
+//   newUser.basic.username = req.body.username;
+//   newUser.username = req.body.username;
+//   newUser.generateHash(req.body.password, function(err, hash) {
 //     if (err) return handleError(err, res);
-
-//     if(!user) {
-//       console.log('could not authenticate: ' + req.auth.username);
-//       return res.status(401).json({msg: 'could not authenticate'});
-//     }
-
-//     user.comapreHash(req.auth.password, function(err, hashRes) {
+//     newUser.save(function(err, data) {
 //       if (err) return handleError(err, res);
-//       if (!hashRes) {
-//         console.log('could not authenticate: ' + req.auth.username);
-//         return res.status(401).json({msg: 'authenticat says NO!'});
-//       }
-
-//       user.generateToken(function(err, toaken) {
+//       newUser.generateToken(function(err, token) {
 //         if (err) return handleError(err, res);
-//         res.json({token: token});
+//         res.json({toaken: token});
 //       });
 //     });
 //   });
 // });
 
-
-
-
-// This code may be useful for user manipulation
-// usersRouter.get('/users', function(req, res) {
-//   User.find({}, function(err, data) {
-//     if (err) return handleError(err, res);
-
-//     res.json(data);
-//   });
-// });
-
-// usersRouter.post('/users', jsonParser.json(), function(req, res) {
-//   var newUser = new User(req.body);
-//   newUser.save(function(err, data) {
-//     if (err) return handleError(err, res);
-
-//     res.json(data);
-//   });
-// });
-
-// usersRouter.put('/users/:id', jsonParser.json(), function(req, res) {
-//   var userData = req.body;
-//   delete userData._id;
-//   User.update({_id: req.params.id}, userData, function(err) {
-//     if (err) return handleError(err, res);
-
-//     res.json({msg: 'successfully updated a user!'});
-//   });
-// });
-
-// usersRouter.delete('/users/:id', function(req, res) {
-//   User.remove({_id: req.params.id}, function(err) {
-//     if (err) return handleError(err, res);
-
-//     res.json({msg: 'You successfully deleted a user!'});
-//   });
-// });
