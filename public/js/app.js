@@ -3,6 +3,26 @@ window.onload = function() {
   var routeDup = new Set();
   var layerArray = [];
 
+  //runs the .done part of an ajax request
+  function ajaxDone (res) {
+    for (var i = 0; i < res.length; i++) {
+      var fullRouteNum = res[i].properties.ROUTE;
+      if (!routeDup.has(fullRouteNum)) {
+        routeDup.add(fullRouteNum);
+
+        //makes layer on map
+        geojson = L.geoJson(res[i], {
+          style: style,
+          onEachFeature: onEachFeature
+          // zoomToFeature
+        }).addTo(map).bindPopup(fullRouteNum);
+        layerArray.push(geojson);
+
+        $('#selected-routes').append('<button id="route-number" class="' +  fullRouteNum + '">' + fullRouteNum + '</button>');
+      };
+    };
+  };
+
   function getNearBusRoutes(radius) {
     $.ajax ({
       url: 'http://localhost:3000/api/nearbusroutes/' ,
@@ -14,24 +34,7 @@ window.onload = function() {
       }
     })
     .done(function(res) {
-      console.log('done');
-      for (var i = 0; i < res.length; i++) {
-        var fullRouteNum = res[i].properties.ROUTE;
-        if (!routeDup.has(fullRouteNum)) {
-          routeDup.add(fullRouteNum);
-
-          //makes layer on map
-          geojson = L.geoJson(res[i], {
-            style: style,
-            onEachFeature: onEachFeature
-            // zoomToFeature
-          }).addTo(map).bindPopup(fullRouteNum);
-          layerArray.push(geojson);
-
-          $('#selected-routes').append('<button id="route-number" class="' +  fullRouteNum + '">' + fullRouteNum + '</button>')
-        }
-
-      }
+      ajaxDone(res)
     })
     .fail(function(err) {
       console.log(err);
@@ -42,28 +45,15 @@ window.onload = function() {
   $('#route-submit').on('click', function(e) {
     e.preventDefault();
     var routeNum = $('#input-route').val();
-    console.log('it clicked');
     $.ajax({
         url: 'http://localhost:3000/api/busroutes/' + routeNum,
         method: 'GET',
     })
     .done(function(res) {
-      for (var i = 0; i < res.length; i++) {
-        var fullRouteNum = res[i].properties.ROUTE;
-        if (!routeDup.has(fullRouteNum)) {
-          routeDup.add(fullRouteNum);
-
-          //makes layer on map
-          geojson = L.geoJson(res[i], {
-            style: style,
-            onEachFeature: onEachFeature
-            // zoomToFeature
-          }).addTo(map).bindPopup(fullRouteNum);
-          layerArray.push(geojson);
-
-          $('#selected-routes').append('<button id="route-number" class="' +  fullRouteNum + '">' + fullRouteNum + '</button>')
-        }
-      };
+      ajaxDone(res);
+    })
+    .fail(function(err) {
+      console.log(err);
     });
   });
 
