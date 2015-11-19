@@ -38,6 +38,7 @@ map.on('locationerror', onLocationError);
 
 map.locate({setView: true, maxZoom: 13});
 
+
 function onMapClick(e) {
   lng = e.latlng.lng;
   lat = e.latlng.lat;
@@ -50,7 +51,6 @@ function onMapClick(e) {
 }
 
 map.on('click', onMapClick);
-
 
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;

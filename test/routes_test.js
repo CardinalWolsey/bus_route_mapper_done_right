@@ -98,8 +98,7 @@ describe('bus routes', function() {
         });
     });
 
-
-    it('should be able to patch a route');
+    // it('should be able to patch a route');
   });
   describe()
   it('should test if near by routes was gotten')
