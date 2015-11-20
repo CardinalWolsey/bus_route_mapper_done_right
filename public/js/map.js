@@ -1,4 +1,7 @@
 var map = L.map('map');
+//for eventlisteners and location to use
+var geojson, lng, lat;
+var popup = L.popup();
 
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibXJpbmdlbCIsImEiOiJjaWd5bmljcm4wdmk2dmttNXg1ZGd3ODM5In0.GbAVcFSt6FWimnWc0XvsLw', {
 //   maxZoom: 18,
@@ -14,8 +17,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18
 }).addTo(map);
 
-//for eventlisteners to use
-var geojson;
 
 //finds and centers where current location is
 function onLocationFound(e) {
@@ -37,7 +38,17 @@ map.on('locationerror', onLocationError);
 
 map.locate({setView: true, maxZoom: 13});
 
-var popup = L.popup();
+
+function onMapClick(e) {
+  lng = e.latlng.lng;
+  lat = e.latlng.lat;
+  popup
+    .setLatLng(e.latlng)
+    .setContent("You clicked at " + e.latlng.toString() +
+      "\n <button id='nearButton' type='button' data-lng='" +
+      e.latlng.lng.toString() + "' data-lat='" + e.latlng.lat.toString() + "' >Nearby Routes</button>")
+    .openOn(map);
+}
 
 map.on('click', onMapClick);
 
@@ -95,8 +106,23 @@ function zoomToFeature(e) {
 //summarizes events on geoJson layer
 function onEachFeature(feature, layer) {
   layer.on({
+    click: highlightRoute,
     mouseover: highlightRoute,
     mouseout: resetHighlight,
+  });
+  layer.on({
     click: zoomToFeature
   });
+  // does this feature have a property named popupContent?
+  if (feature.properties && feature.properties.ROUTE) {
+      layer.bindPopup(feature.properties.ROUTE);
+  }
+}
+
+//adds
+function mapDisplay(route) {
+  L.geoJson(route, {
+    style: style,
+    onEachFeature: onEachFeature
+  }).addTo(map);
 }
