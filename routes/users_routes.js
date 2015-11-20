@@ -51,7 +51,7 @@ authRouter.get('/signin', basicHttp, function(req, res) {
     user.generateToken(function(err, token) {
       if (err) return handleError(err, res);
 
-      res.json({token: token})
+      res.json({token: token});
     });
   });
 });

@@ -10,7 +10,8 @@ var eatAuth = require(__dirname + '/../lib/eat_auth');
 
 var busRouter = module.exports = exports = express.Router();
 
-busRouter.post('/busroutes', bodyParser.json(), eatAuth, function(req, res) {
+//, bodyParser.json(), eatAuth
+busRouter.post('/busroutes', function(req, res) {
   console.log('post request recieved');
   var newBusRoute = new busRoute(req.body);
   newBusRoute.save(function(err, data) {
@@ -20,7 +21,7 @@ busRouter.post('/busroutes', bodyParser.json(), eatAuth, function(req, res) {
   });
 });
 
-busRouter.get('/busroutes/:route_num', bodyParser.json(), eatAuth, function(req, res) {
+busRouter.get('/busroutes/:route_num', function(req, res) {
   busRoute.find({"properties.RTE_NUM":req.params.route_num}, function(err, data) {
     if (err) return handleError(err, res);
 
@@ -28,7 +29,7 @@ busRouter.get('/busroutes/:route_num', bodyParser.json(), eatAuth, function(req,
   });
 });
 
-busRouter.put('/busroutes/:id', bodyParser.json(), function(req, res) {
+busRouter.put('/busroutes/:id', bodyParser.json(), eatAuth, function(req, res) {
   var busRouteData = req.body;
   delete busRouteData._id;
   busRoute.update({_id: req.params.id}, busRouteData, function(err) {
