@@ -77,12 +77,17 @@ describe('auth', function() {
     });
 
     it('should be able to authenticate with eat auth', function(done) {
-      // var token = this.token;
+      var token2 = this.token;
       var req = {
         body: {
           token: this.token
+        },
+        headers: {
+          token: this.token
         }
       };
+
+      console.log(req)
 
       eatAuth(req, {}, function() {
         expect(req.user.username).to.eql('test');

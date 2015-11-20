@@ -51,13 +51,14 @@ describe('bus routes', function() {
       geometry: {
         type: "MultiLineString",
         coordinates: [[0,0], [1,1]]
-      }
+      },
+      token: this.token
     };
 
     chai.request('localhost:3000')
       .post('/api/busroutes')
       //add in token: this.token
-      .send({token: this.token}, routeData)
+      .send(routeData)
       .end(function(err, res) {
         expect(err).to.eql(null);
         expect(res.body.properties.ROUTE).to.eql('999');
