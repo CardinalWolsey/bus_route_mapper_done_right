@@ -32,7 +32,7 @@ describe('bus routes', function() {
           if (err) return handleError(err, res);
 
           this.token = token;
-          console.log(this.token);
+          // console.log(this.token);
           done();
         }.bind(this));
       }.bind(this));
@@ -57,7 +57,7 @@ describe('bus routes', function() {
     chai.request('localhost:3000')
       .post('/api/busroutes')
       //add in token: this.token
-      .send(routeData)
+      .send({token: this.token}, routeData)
       .end(function(err, res) {
         expect(err).to.eql(null);
         expect(res.body.properties.ROUTE).to.eql('999');
