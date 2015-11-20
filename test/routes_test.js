@@ -9,6 +9,8 @@ require(__dirname + '/../server');
 var mongoose = require('mongoose');
 //need to define the Route constructor to match how routes are formatted in the county data
 var Route = require(__dirname + '/../models/busRoute');
+var User = require(__dirname + '/../models/user');
+var handleError = require(__dirname + '/../lib/handleServerError');
 
 
 
@@ -20,7 +22,26 @@ describe('bus routes', function() {
     });
   });
 
-  //This is a test outline.  Need to finish and integrate
+    before('generating a token',function(done) {
+      var user = new User();
+      user.username = 'test';
+      user.auth.basic.username = 'test';
+      user.hashPassword('foobar123');
+
+      user.save(function(err, data) {
+        if (err) throw handleError(err, res);
+
+        user.generateToken(function(err, token) {
+          if (err) return handleError(err, res);
+
+          this.token = token;
+          // console.log(this.token);
+          done();
+        }.bind(this));
+      }.bind(this));
+    });
+
+
   it('should be able to create a route', function(done) {
     var routeData = {
       type: "Feature",
@@ -31,13 +52,15 @@ describe('bus routes', function() {
         Shape_len: 1
       },
       geometry: {
-        type: "LineString",
-        coordinates: [ [ -122.249571045878781, 47.6112335962925 ], [ -122.226014708001799, 47.596727964758841 ] ]
-      }
-
+        type: "MultiLineString",
+        coordinates: [[0,0], [1,1]]
+      },
+      token: this.token
     };
+
     chai.request('localhost:3000')
       .post('/api/busroutes')
+      //add in token: this.token
       .send(routeData)
       .end(function(err, res) {
         expect(err).to.eql(null);
@@ -70,9 +93,11 @@ describe('bus routes', function() {
           Shape_len: 1
         },
         geometry: {
-          type: "LineString",
-          coordinates: [ [ -122.249571045878781, 47.6112335962925 ], [ -122.226014708001799, 47.596727964758841 ] ]
-      }})).save(function(err, data) {
+          type: "MultiLineString",
+          coordinates: [[0,0], [1,1]]
+      }
+      //add in token equals this.token
+    })).save(function(err, data) {
         expect(err).to.eql(null);
         this.route = data;
         done();
@@ -82,7 +107,7 @@ describe('bus routes', function() {
     it('should be able to modify a route', function(done) {
       chai.request('localhost:3000')
         .put('/api/busroutes/' + this.route._id)
-        .send({properties:{ROUTE: 888}})
+        .send({properties:{ROUTE: 888}, token: this.token})
         .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res.body.msg).to.eql('successfully updated route with put method');
@@ -93,6 +118,7 @@ describe('bus routes', function() {
     it('should be able to remove a route', function(done) {
       chai.request('localhost:3000')
         .delete('/api/busroutes/' + this.route._id)
+        .send({token: this.token})
         .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res.body.msg).to.eql('successfully deleted route with delete method');
@@ -100,18 +126,19 @@ describe('bus routes', function() {
         });
     });
 
-    it('should be able to find nearby routes', function(done) {
-      chai.request('localhost:3000')
-        .get('/api/nearbusroutes/?lng=-122.249&lat=47.611&radius=400')
-        // .send({lng: 47.611, lat: -122.249, radius: 400})
-        // there should be a way to do this without putting it into the
-        // actual url, right?
-        .end(function(err, res) {
-          expect(err).to.eql(null);
-          expect(Array.isArray(res.body)).to.eql(true);
-          done();
-        });
-    });
+
+    // it('should be able to find nearby routes', function(done) {
+    //   chai.request('localhost:3000')
+    //     .get('/api/nearbusroutes/?lng=-122.249&lat=47.611&radius=400')
+    //     // .send({lng: 47.611, lat: -122.249, radius: 400})
+    //     // there should be a way to do this without putting it into the
+    //     // actual url, right?
+    //     .end(function(err, res) {
+    //       expect(err).to.eql(null);
+    //       expect(Array.isArray(res.body)).to.eql(true);
+    //       done();
+    //     });
+    // });
 
   });
 
