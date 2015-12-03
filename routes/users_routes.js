@@ -24,7 +24,6 @@ authRouter.post('/signup', jsonParser, function(req, res) {
   });
 });
 
-
 //include generateToken
 authRouter.get('/signin', basicHttp, function(req, res) {
   if (!(req.auth.username && req.auth.password)) {
@@ -55,22 +54,3 @@ authRouter.get('/signin', basicHttp, function(req, res) {
     });
   });
 });
-
-
-// //added code
-// usersRouter.post('/signup', jsonParser, function(req, res) {
-//   var newUser = new User();
-//   newUser.basic.username = req.body.username;
-//   newUser.username = req.body.username;
-//   newUser.generateHash(req.body.password, function(err, hash) {
-//     if (err) return handleError(err, res);
-//     newUser.save(function(err, data) {
-//       if (err) return handleError(err, res);
-//       newUser.generateToken(function(err, token) {
-//         if (err) return handleError(err, res);
-//         res.json({toaken: token});
-//       });
-//     });
-//   });
-// });
-

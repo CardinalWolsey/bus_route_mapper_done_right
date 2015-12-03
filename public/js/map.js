@@ -119,7 +119,7 @@ function onEachFeature(feature, layer) {
   }
 }
 
-//adds
+//adds style and display
 function mapDisplay(route) {
   L.geoJson(route, {
     style: style,

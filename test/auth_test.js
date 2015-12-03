@@ -59,7 +59,6 @@ describe('auth', function() {
           if (err) return handleError(err, res);
 
           this.token = token;
-          // console.log(this.token);
           done();
         }.bind(this));
       }.bind(this));
@@ -86,8 +85,6 @@ describe('auth', function() {
           token: this.token
         }
       };
-
-      console.log(req)
 
       eatAuth(req, {}, function() {
         expect(req.user.username).to.eql('test');

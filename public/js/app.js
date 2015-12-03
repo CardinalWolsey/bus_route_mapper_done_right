@@ -3,7 +3,6 @@ window.onload = function() {
   var routeDup = new Set();
   var layerArray = [];
 
-
   //runs the .done part of an ajax request
   function ajaxDone (res) {
     for (var i = 0; i < res.length; i++) {
@@ -369,10 +368,9 @@ window.onload = function() {
 
     var sortedFullRoute = $.unique(fullRoute);
 
-    // console.log(fullRoute);
     sortedFullRoute.forEach(function(element, index, fullRoute) {
       $('#input-route').append('<option value="' + element + '">' + element + '</option>');
     });
-  };
+  }
   makeBusList();
 };

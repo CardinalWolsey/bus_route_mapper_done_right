@@ -125,21 +125,6 @@ describe('bus routes', function() {
           done();
         });
     });
-
-
-    // it('should be able to find nearby routes', function(done) {
-    //   chai.request('localhost:3000')
-    //     .get('/api/nearbusroutes/?lng=-122.249&lat=47.611&radius=400')
-    //     // .send({lng: 47.611, lat: -122.249, radius: 400})
-    //     // there should be a way to do this without putting it into the
-    //     // actual url, right?
-    //     .end(function(err, res) {
-    //       expect(err).to.eql(null);
-    //       expect(Array.isArray(res.body)).to.eql(true);
-    //       done();
-    //     });
-    // });
-
   });
 
 });

@@ -2,13 +2,10 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 var busRoute = require(__dirname + '/../models/busRoute');
-
 var handleError = require(__dirname + '/../lib/handleServerError');
-
 var eatAuth = require(__dirname + '/../lib/eat_auth');
 
 var busRouter = module.exports = exports = express.Router();
-
 
 busRouter.post('/busroutes', bodyParser.json(), eatAuth, function(req, res) {
   console.log('post request recieved');
@@ -39,7 +36,6 @@ busRouter.put('/busroutes/:id', bodyParser.json(), eatAuth, function(req, res) {
   });
 });
 
-
 busRouter.delete('/busroutes/:id', bodyParser.json(), eatAuth, function(req, res) {
   busRoute.remove({_id: req.params.id}, function(err) {
     if (err) return handleError(err, res);
@@ -61,6 +57,3 @@ busRouter.get('/nearbusroutes/', function(req, res) {
     res.json(data);
   });
 });
-
-
-// db.routes.find( { geometry:{ $near: { $geometry: { type: "Point", coordinates: [-122.31, 47.6244] }, $maxDistance: 1000 } } },{geometry: 0} ).limit(2).pretty()
