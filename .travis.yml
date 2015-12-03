@@ -1,3 +1,10 @@
+env:
+  global:
+    - CAMPFIRE_TOKEN=abc123
+    - TIMEOUT=1000
+  matrix:
+    - USE_NETWORK=true
+    - USE_NETWORK=false
 language: node_js
 node_js:
   - '4.1'
