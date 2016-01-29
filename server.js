@@ -11,7 +11,7 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/busData');
 // process.env.APP_SECRET = process.env.APP_SECRET || 'changemechangemechangeme';
 
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/build'));
 
 app.use('/api', busRoutes);
 app.use('/api', authRoutes);
