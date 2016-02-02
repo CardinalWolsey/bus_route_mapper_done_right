@@ -1,14 +1,43 @@
-// base
-
 html {
   color: #F2F2F2;
+  background-color: #262526;
+}
+
+header {
+  height: 64px;
+  margin: 0 10px;
+  border-bottom-width: 2px;
+  border-bottom-color: #404040;
+  border-bottom-style: solid;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
 }
 
 h1 {
-  font-size: 100px;
+  font-size: 2.618em;
+  margin: 10px 12px;
 }
 
-// style
-header {
-  height: 64px;
+main {
+  margin: 10px 0;
+  height: 100%;
+}
+
+aside {
+  width: 240px;
+  height: 100%;
+  border-right: 2px;
+  border-style: solid;
+  border-color: #404040;
+}
+
+#map {
+  height: 180px;
+  width: 180px;
 }

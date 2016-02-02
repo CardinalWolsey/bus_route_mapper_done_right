@@ -58,10 +58,11 @@ gulp.task('sass:dev', function() {
 });
 
 gulp.task('css:watch', function() {
-  gulp.watch(['./app/css/**/*.scss', './app/index.html'], ['sass:dev', 'static:dev']);
+  gulp.watch('./app/**/*', ['styles']);
 });
 
 gulp.task('build:dev', ['webpack:dev', 'static:dev', 'css:dev']);
 
+gulp.task('styles', ['sass:dev', 'static:dev']);
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
 gulp.task('default', ['jshint', 'mocha']);
