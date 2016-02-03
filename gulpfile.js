@@ -40,6 +40,11 @@ gulp.task('static:dev', function() {
     .pipe(gulp.dest('build/'));
 });
 
+gulp.task('map:dev', function() {
+  gulp.src('app/js/map.js')
+    .pipe(gulp.dest('build/js'));
+});
+
 gulp.task('webpack:dev', function() {
   gulp.src('app/js/entry.js')
     .pipe(webpack({
@@ -61,7 +66,7 @@ gulp.task('css:watch', function() {
   gulp.watch('./app/**/*', ['styles']);
 });
 
-gulp.task('build:dev', ['webpack:dev', 'static:dev', 'css:dev']);
+gulp.task('build:dev', ['webpack:dev', 'static:dev', 'sass:dev', 'map:dev']);
 
 gulp.task('styles', ['sass:dev', 'static:dev']);
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
