@@ -29,7 +29,7 @@
 
   </header>
 
-  <aside>
+  <!-- <aside>
     <table>
       <thead>
         <tr>
@@ -44,11 +44,21 @@
         </tr>
       </tbody>
     </table>
-  </aside>
+  </aside> -->
 
   <main>
-    <div data-ng-view></div>
-    <leaflet ng-show='showMap'></leaflet>
+
+    <div class="pure-g">
+        <div class="pure-u-1-5">
+          <div data-ng-view></div>
+
+        </div>
+
+        <div class="pure-u-4-5">
+          <leaflet height="480px" width="100%"></leaflet>
+        </div>
+    </div>
+
   </main>
 
   <script src="bundle.js"></script>

@@ -7,5 +7,5 @@ require('./directives/angular-leaflet-directive');
 // require('./multi-select');
 // require('angular-material');
 
-var mapApp = angular.module('MapApp', []);
+var mapApp = angular.module('MapApp', ['leaflet-directive']);
 require('./map/map')(mapApp);
