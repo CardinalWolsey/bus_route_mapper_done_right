@@ -66,7 +66,7 @@ gulp.task('css:watch', function() {
   gulp.watch('./app/**/*', ['styles']);
 });
 
-gulp.task('build:dev', ['webpack:dev', 'static:dev', 'sass:dev', 'map:dev']);
+gulp.task('build:dev', ['webpack:dev', 'static:dev', 'sass:dev']);
 
 gulp.task('styles', ['sass:dev', 'static:dev']);
 gulp.task('jshint', ['jshint:test', 'jshint:app']);

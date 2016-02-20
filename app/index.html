@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <link rel="stylesheet" type="text/css" href="application.css">
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
 </head>
-<body>
+<body data-ng-app="MapApp">
   <header>
     <h1>bus route mapper</h1>
 
@@ -30,33 +29,28 @@
 
   </header>
 
+  <aside>
+    <table>
+      <thead>
+        <tr>
+          <th>route</th>
+          <th>color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>12</td>
+          <td>green</td>
+        </tr>
+      </tbody>
+    </table>
+  </aside>
+
   <main>
-
-    <aside>
-      <table>
-        <thead>
-          <tr>
-            <th>route</th>
-            <th>color</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>12</td>
-            <td>green</td>
-          </tr>
-        </tbody>
-      </table>
-    </aside>
-
-    <map id="map">
-    </map>
-
+    <div data-ng-view></div>
+    <leaflet ng-show='showMap'></leaflet>
   </main>
 
-
   <script src="bundle.js"></script>
-  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-  <script type="text/javascript" src="js/map.js"></script>
 </body>
 </html>
