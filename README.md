@@ -1,10 +1,12 @@
-# King Country Bus Route API
+[![Build Status](https://travis-ci.org/CardinalWolsey/bus_route_mapper_done_right.svg)](https://travis-ci.org/CardinalWolsey/bus_route_mapper_done_right)
 
-**Spencer Caldwell**   
-**Matthew Ringel**  
-**Michael Tse**  
+# King County Bus Route API
 
-**Code Fellows**  
+**Spencer Caldwell**
+**Matthew Ringel**
+**Michael Tse**
+
+**Code Fellows**
 **sea-d45-javascript**
 
 This is a project for the JavaScript Full-Stack Development Accelerator at Code Fellows.
@@ -22,7 +24,7 @@ Make a GET request to
 
 ```
 http://bus-route-mapper.herokuapp.com/api/busroutes/[bus_route_number]
-```  
+```
 
 The response will be an array of geojson objects of all the bus routes under King County Metro with that route number.  This will return more than one geojson object in the array, as multiple service types are listed under one route number.  For example, for route 7 there are 7AS, 7AT, 7AZ, and 7AN service types.  The API will return all of these separate routes in the array.
 

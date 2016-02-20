@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="application.css">
+</head>
+<body data-ng-app="MapApp">
+
+  <header>
+    <h1>bus route mapper</h1>
+    <nav>
+      <form class="navElement" name="enterRouteNumber">
+        <label for="routeNumber">enter route</label>
+        <input type="text" id="routeNumber">
+        <button type="submit" name="button">plot route</button>
+      </form>
+      <button class="navElement" type="submit" name="clearRoutes">clear routes</button>
+      <button class="navElement" type="button" name="mapTheme">map theme</button>
+      <button class="navElement" type="button" name="menuButton">menu button</button>
+      <form class="navElement" name="loginForm">
+        <label for="username">username</label>
+        <input type="text" id="username" required>
+        <lable for="password">password</lable>
+        <input type="text" id="password" required>
+        <button type="submit" name="button">login</button>
+      </form>
+    </nav>
+  </header>
+
+  <main>
+    
+    <aside>
+      <table>
+        <thead>
+          <tr>
+            <th>route</th>
+            <th>color</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>12</td>
+            <td>green</td>
+          </tr>
+        </tbody>
+      </table>
+    </aside>
+
+    <map>
+      <leaflet height="100%" width="100%"></leaflet>
+    </map>
+
+  </main>
+
+  <script src="bundle.js"></script>
+</body>
+</html>
