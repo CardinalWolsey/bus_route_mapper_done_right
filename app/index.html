@@ -7,12 +7,12 @@
 </head>
 <body data-ng-app="MapApp">
 
-  <header>
+  <header data-ng-controller="RouteController">
     <h1>bus route mapper</h1>
     <nav>
-      <form class="navElement" name="enterRouteNumber">
+      <form class="navElement" name="enterRouteNumber" data-ng-submit="displayRoute(busRoute)">
         <label for="routeNumber">enter route</label>
-        <input type="text" id="routeNumber">
+        <input type="text" id="routeNumber" data-ng-model="busRoute">
         <button type="submit" name="button">plot route</button>
       </form>
       <button class="navElement" type="submit" name="clearRoutes">clear routes</button>
@@ -29,7 +29,7 @@
   </header>
 
   <main>
-    
+
     <aside>
       <table>
         <thead>
