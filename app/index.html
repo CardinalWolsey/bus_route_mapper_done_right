@@ -15,7 +15,7 @@
         <input type="text" id="routeNumber" data-ng-model="busRoute">
         <button type="submit" name="button">plot route</button>
       </form>
-      <button class="navElement" type="submit" name="clearRoutes">clear routes</button>
+      <button class="navElement" type="submit" name="clearRoutes" data-ng-submit="clearRoutes">clear routes</button>
       <button class="navElement" type="button" name="mapTheme">map theme</button>
       <button class="navElement" type="button" name="menuButton">menu button</button>
       <form class="navElement" name="loginForm">
@@ -30,7 +30,7 @@
 
   <main>
 
-    <aside>
+    <aside data-ng-controller="TableController">
       <table>
         <thead>
           <tr>
@@ -39,8 +39,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>12</td>
+          <tr data-ng-repeat="busRouteData in busRouteDatas">
+            <td>{{busRouteData}}</td>
             <td>green</td>
           </tr>
         </tbody>
