@@ -23,26 +23,20 @@ module.exports = function(app) {
       $scope.layerGroup = L.layerGroup().addTo(map);
     });
 
-    $scope.busRouteDatas = null;
-    $scope.busRoutes = [];
-    // var routesLayerGroup = L.layerGroup([busRoutes]);
+    $scope.busRouteDatas = [];
 
     $scope.displayRoute = function(route) {
       $http.get('/api/busroutes/' + route)
         .then(function(res) {
-          //could make this cleaner
-          $scope.busRouteDatas = res.data;
+
           for (var i = 0; i < res.data.length; i++) {
-            $scope.busRoutes.push(res.data[i]);
+            var newLayer = L.geoJson(res.data[i]);
+            $scope.layerGroup.addLayer(newLayer);
+            res.data[i].leafletLayer = newLayer;
+            $scope.busRouteDatas.push(res.data[i]);
           }
           console.log($scope.busRouteDatas);
-          console.log($scope.busRoutes);
 
-          leafletData.getMap().then(function(map) {
-            var newLayer = L.geoJson($scope.busRouteDatas);
-            $scope.layerGroup.addLayer(newLayer);
-            map.fitBounds(newLayer);
-          });
         }, function(err) {
           console.log(err);
           console.log(err.data);
@@ -51,7 +45,6 @@ module.exports = function(app) {
 
     $scope.clearRoutes = function() {
       $scope.busRouteDatas = null;
-      $scope.busRoutes = null;
       $scope.layerGroup.clearLayers();
       console.log('somepthing stupid');
     }
