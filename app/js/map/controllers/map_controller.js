@@ -17,6 +17,12 @@ module.exports = function(app) {
   }]);
 
   app.controller('RouteController', ['$scope', '$http', 'leafletData', function($scope, $http, leafletData) {
+    $scope.layerGroup = null;
+
+    leafletData.getMap().then(function(map) {
+      $scope.layerGroup = L.layerGroup().addTo(map);
+    });
+
     $scope.busRouteDatas = null;
     $scope.busRoutes = [];
     // var routesLayerGroup = L.layerGroup([busRoutes]);
@@ -26,12 +32,16 @@ module.exports = function(app) {
         .then(function(res) {
           //could make this cleaner
           $scope.busRouteDatas = res.data;
-          $scope.busRoutes.push(res.data);
+          for (var i = 0; i < res.data.length; i++) {
+            $scope.busRoutes.push(res.data[i]);
+          }
           console.log($scope.busRouteDatas);
           console.log($scope.busRoutes);
 
           leafletData.getMap().then(function(map) {
-            L.geoJson($scope.busRouteDatas).addTo(map);
+            var newLayer = L.geoJson($scope.busRouteDatas);
+            $scope.layerGroup.addLayer(newLayer);
+            map.fitBounds(newLayer);
           });
         }, function(err) {
           console.log(err);
@@ -39,18 +49,12 @@ module.exports = function(app) {
         });
       };
 
-    $scope.clearRoutes = function(route) {
+    $scope.clearRoutes = function() {
       $scope.busRouteDatas = null;
-      leafletData.getMap().then(function(map) {
-        L.geoJson($scope.busRouteDatas).addTo(map);
-      });
+      $scope.busRoutes = null;
+      $scope.layerGroup.clearLayers();
+      console.log('somepthing stupid');
     }
   }]);
-  //
-  // app.controller('TableController', ['$scope', function($scope) {
-  //   $scope.consoleLog = function() {
-  //     console.log('this is a test ' + $scope.busRouteDatas);
-  //   };
-  // }]);
 
 }

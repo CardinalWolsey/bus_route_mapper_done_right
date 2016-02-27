@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ng-app="MapApp">
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
   <link rel="stylesheet" type="text/css" href="application.css">
 </head>
-<body data-ng-app="MapApp">
+<body data-ng-controller="RouteController">
 
-  <header data-ng-controller="RouteController">
+  <header >
     <h1>bus route mapper</h1>
     <nav>
       <form class="navElement" name="enterRouteNumber" data-ng-submit="displayRoute(busRoute)">
@@ -15,7 +15,7 @@
         <input type="text" id="routeNumber" data-ng-model="busRoute">
         <button type="submit" name="button">plot route</button>
       </form>
-      <button class="navElement" type="submit" name="clearRoutes" data-ng-submit="clearRoutes">clear routes</button>
+      <button class="navElement" type="button" name="clearRoutes" data-ng-click="clearRoutes()">clear routes</button>
       <button class="navElement" type="button" name="mapTheme">map theme</button>
       <button class="navElement" type="button" name="menuButton">menu button</button>
       <form class="navElement" name="loginForm">
@@ -30,7 +30,7 @@
 
   <main>
 
-    <aside data-ng-controller="TableController">
+    <aside>
       <table>
         <thead>
           <tr>
@@ -39,8 +39,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr data-ng-repeat="busRouteData in busRouteDatas">
-            <td>{{busRouteData}}</td>
+          <tr data-ng-repeat="busRouteData in busRoutes">
+            <td>{{busRouteData.properties.RTE_NUM}}</td>
             <td>green</td>
           </tr>
         </tbody>
