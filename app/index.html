@@ -42,6 +42,7 @@
           <tr data-ng-repeat="busRouteData in busRouteDatas">
             <td>{{busRouteData.properties.RTE_NUM}}</td>
             <td>green</td>
+            <td><button type="button" data-ng-click="deleteRoute(busRouteData)">Delete</button></td>
           </tr>
         </tbody>
       </table>

@@ -36,12 +36,18 @@ module.exports = function(app) {
             $scope.busRouteDatas.push(res.data[i]);
           }
           console.log($scope.busRouteDatas);
+          $scope.busRoute = null;
 
         }, function(err) {
           console.log(err);
           console.log(err.data);
         });
       };
+
+    $scope.deleteRoute = function(layer) {
+      $scope.layerGroup.removeLayer(layer.leafletLayer);
+      $scope.busRouteDatas.splice($scope.busRouteDatas.indexOf(layer), 1);
+    }
 
     $scope.clearRoutes = function() {
       $scope.busRouteDatas = null;
