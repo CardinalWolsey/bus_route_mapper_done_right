@@ -50,7 +50,7 @@ module.exports = function(app) {
     }
 
     $scope.clearRoutes = function() {
-      $scope.busRouteDatas = null;
+      $scope.busRouteDatas = [];
       $scope.layerGroup.clearLayers();
       console.log('somepthing stupid');
     }
