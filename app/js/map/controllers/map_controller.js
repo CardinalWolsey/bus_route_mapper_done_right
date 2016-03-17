@@ -39,7 +39,7 @@ module.exports = function(app) {
           return colorLibrary[i];
         }
       }
-      return colorLibrary[5].colorFamily;
+      return colorLibrary[5];
     }
 
     $scope.displayRoute = function(route) {
