@@ -25,18 +25,18 @@ module.exports = function(app) {
 
     $scope.busRouteDatas = [];
 
-    var colorLibrary = [{inUse: false, colorFamily: ["#08306b", "#08519c", "#2171b5", "#4292c6", "#6baed6"]},
-                        {inUse: false, colorFamily: ["#00441b", "#006d2c", "#238b45", "#41ab5d", "#74c476"]},
-                        {inUse: false, colorFamily: ["#3f007d", "#54278f", "#6a51a3", "#807dba", "#9e9ac8"]},
-                        {inUse: false, colorFamily: ["#67000d", "#a50f15", "#cb181d", "#ef3b2c", "#fb6a4a"]},
-                        {inUse: false, colorFamily: ["#99540F", "#B26F2C", "#CC8E51", "#E5B17E", "#FFD8B2"]},
-                        {inUse: false, colorFamily: ["#000000", "#252525", "#525252", "#737373", "#969696"]}];
+    var colorLibrary = [{inUse: false, color: 'blue', colorFamily: ["#08306b", "#08519c", "#2171b5", "#4292c6", "#6baed6"]},
+                        {inUse: false, color: 'green', colorFamily: ["#00441b", "#006d2c", "#238b45", "#41ab5d", "#74c476"]},
+                        {inUse: false, color: 'purple', colorFamily: ["#3f007d", "#54278f", "#6a51a3", "#807dba", "#9e9ac8"]},
+                        {inUse: false, color: 'red', colorFamily: ["#67000d", "#a50f15", "#cb181d", "#ef3b2c", "#fb6a4a"]},
+                        {inUse: false, color: 'brown', colorFamily: ["#99540F", "#B26F2C", "#CC8E51", "#E5B17E", "#FFD8B2"]},
+                        {inUse: false, color: 'black', colorFamily: ["#000000", "#252525", "#525252", "#737373", "#969696"]}];
 
     var findColorFamily = function() {
       for (var i = 0; i < colorLibrary.length; i++) {
         if (colorLibrary[i].inUse === false) {
           colorLibrary[i].inUse = true;
-          return colorLibrary[i].colorFamily;
+          return colorLibrary[i];
         }
       }
       return colorLibrary[5].colorFamily;
@@ -51,10 +51,11 @@ module.exports = function(app) {
 
           for (var i = 0; i < res.data.length; i++) {
             var newLayer = L.geoJson(res.data[i], {
-              style: {"color": routeColor[i%5]}
+              style: {"color": routeColor.colorFamily[i%5]}
             });
             $scope.layerGroup.addLayer(newLayer);
             res.data[i].leafletLayer = newLayer;
+            res.data[i].properties.colorName = routeColor.color;
             $scope.busRouteDatas.push(res.data[i]);
           }
           console.log($scope.busRouteDatas);
@@ -66,10 +67,22 @@ module.exports = function(app) {
         });
       };
 
-    $scope.deleteRoute = function(layer) {
-      $scope.layerGroup.removeLayer(layer.leafletLayer);
-      $scope.busRouteDatas.splice($scope.busRouteDatas.indexOf(layer), 1);
-    }
+    $scope.deleteRoute = function(routeObject) {
+      $scope.layerGroup.removeLayer(routeObject.leafletLayer);
+      $scope.busRouteDatas.splice($scope.busRouteDatas.indexOf(routeObject), 1);
+      var filteredArray = $scope.busRouteDatas.filter(function(o) {
+        return o.properties.RTE_NUM === routeObject.properties.RTE_NUM;
+      })
+
+      var colorGroup = routeObject.properties.colorName;
+      if(filteredArray.length === 0) {
+        for (var i = 0; i < colorLibrary.length; i++) {
+          if(colorLibrary[i].color === colorGroup) {
+            colorLibrary[i].inUse = false;
+          }
+        }
+      }
+    };
 
     $scope.clearRoutes = function() {
       $scope.busRouteDatas = [];
