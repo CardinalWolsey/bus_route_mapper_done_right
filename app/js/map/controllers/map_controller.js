@@ -56,6 +56,7 @@ module.exports = function(app) {
             $scope.layerGroup.addLayer(newLayer);
             res.data[i].leafletLayer = newLayer;
             res.data[i].properties.colorName = routeColor.color;
+            res.data[i].properties.colorCode = routeColor.colorFamily[i%5];
             $scope.busRouteDatas.push(res.data[i]);
           }
           console.log($scope.busRouteDatas);

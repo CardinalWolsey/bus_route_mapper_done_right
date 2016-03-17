@@ -1,10 +1,20 @@
 [![Build Status](https://travis-ci.org/CardinalWolsey/bus_route_mapper_done_right.svg)](https://travis-ci.org/CardinalWolsey/bus_route_mapper_done_right)
+#TODO  
+- prevent a single route number from being added to the map more than once (possibly with an error message)  
+- enable map themes  
+- display an error message if a route does not exist  
+- menu button that takes user to other pages   
+- build favorites page  
+- build "add favorites button"  
+- build about page  
+- make login work and connect user accounts with favorites  
+
 
 # King County Bus Route API
 
-**Spencer Caldwell**
-**Matthew Ringel**
-**Michael Tse**
+**Spencer Caldwell**  
+**Matthew Ringel**  
+**Michael Tse**  
 
 **Code Fellows**
 **sea-d45-javascript**
