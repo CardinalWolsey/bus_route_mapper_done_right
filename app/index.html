@@ -41,7 +41,7 @@
         <tbody>
           <tr class="ng-cloak" data-ng-repeat="busRouteData in busRouteDatas">
             <td>{{busRouteData.properties.RTE_NUM}}</td>
-            <td>green</td>
+            <td class="colorBox" style="background-color: {{busRouteData.properties.colorCode}}"></td>
             <td><button type="button" data-ng-click="deleteRoute(busRouteData)">Delete</button></td>
           </tr>
         </tbody>
