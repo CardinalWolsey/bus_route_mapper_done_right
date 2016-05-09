@@ -46,8 +46,16 @@ module.exports = function(app) {
       $http.get('/api/busroutes/' + route)
         .then(function(res) {
 
+          for (var i = 0; i < $scope.busRouteDatas.length; i++) {
+            if(res.data[0].properties.RTE_NUM === $scope.busRouteDatas[i].properties.RTE_NUM) {
+              console.log('this route is already displayed');
+              var duplicateRoute = new Error('route ' + res.data[0].properties.RTE_NUM + ' is alreay plotted on the map');
+              throw duplicateRoute;
+            }
+          }
+
           var routeColor = findColorFamily();
-          console.log(routeColor);
+          // console.log(routeColor);
 
           for (var i = 0; i < res.data.length; i++) {
             var newLayer = L.geoJson(res.data[i], {
@@ -59,7 +67,7 @@ module.exports = function(app) {
             res.data[i].properties.colorCode = routeColor.colorFamily[i%5];
             $scope.busRouteDatas.push(res.data[i]);
           }
-          console.log($scope.busRouteDatas);
+          // console.log($scope.busRouteDatas);
           $scope.busRoute = null;
 
         }, function(err) {

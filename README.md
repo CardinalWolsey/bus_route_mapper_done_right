@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/CardinalWolsey/bus_route_mapper_done_right.svg)](https://travis-ci.org/CardinalWolsey/bus_route_mapper_done_right)
 #TODO  
-- prevent a single route number from being added to the map more than once (possibly with an error message)  
+
 - enable map themes  
 - display an error message if a route does not exist  
 - menu button that takes user to other pages   
