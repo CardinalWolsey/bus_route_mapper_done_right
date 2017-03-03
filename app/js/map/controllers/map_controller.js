@@ -48,8 +48,7 @@ module.exports = function(app) {
 
           for (var i = 0; i < $scope.busRouteDatas.length; i++) {
             if(res.data[0].properties.RTE_NUM === $scope.busRouteDatas[i].properties.RTE_NUM) {
-              console.log('this route is already displayed');
-              var duplicateRoute = new Error('route ' + res.data[0].properties.RTE_NUM + ' is alreay plotted on the map');
+              var duplicateRoute = new Error('route ' + res.data[0].properties.RTE_NUM + ' is alreay plotted on the map.');
               throw duplicateRoute;
             }
           }
