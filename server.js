@@ -1,3 +1,5 @@
+//TODO: update file
+
 var mongoose = require('mongoose');
 var express = require('express');
 var app = express();
@@ -6,10 +8,6 @@ var authRoutes = require(__dirname + '/routes/users_routes');
 process.env.APP_SECRET = process.env.APP_SECRET || 'changemechangemechangeme';
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/busData');
-
-
-// process.env.APP_SECRET = process.env.APP_SECRET || 'changemechangemechangeme';
-
 
 app.use(express.static(__dirname + '/build'));
 
