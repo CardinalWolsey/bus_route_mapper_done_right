@@ -22,7 +22,7 @@
     "chai": "^3.4.1",
     "chai-http": "^1.0.0",
     "geojson-tools": "^0.2.1",
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-concat-css": "^2.2.0",
     "gulp-jshint": "^1.12.0",
     "gulp-minify-css": "^1.2.3",
@@ -38,7 +38,6 @@
     "body-parser": "^1.14.1",
     "eat": "^0.1.1",
     "express": "^4.13.3",
-    "gulp": "^3.9.1",
     "leaflet": "^0.7.7",
     "mongoose": "^4.2.5"
   }

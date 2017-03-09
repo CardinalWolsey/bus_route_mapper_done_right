@@ -16,6 +16,7 @@
 - update slugignore
 - make sure all files in /app folder are updated
 - move off nav and sidebar styling into own css files
+- do better unit tests ... look at 401 work for that
 
 
 # King County Bus Route API
