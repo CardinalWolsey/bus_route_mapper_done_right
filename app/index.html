@@ -3,20 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+
+  <!-- material design lite -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+  <!-- app styling -->
   <link rel="stylesheet" type="text/css" href="application.css">
 </head>
+
 <body data-ng-controller="RouteController">
 
-  <header >
-    <h1>bus route mapper</h1>
+  <header>
+    <h1>BUS ROUTE MAPPER</h1>
     <nav>
-      <form class="navElement" name="enterRouteNumber" data-ng-submit="displayRoute(busRoute)">
-        <label for="routeNumber">enter route</label>
-        <input type="text" id="routeNumber" data-ng-model="busRoute">
-        <button type="submit" name="button">plot route</button>
+      <form class="navElement route-form" name="enterRouteNumber" data-ng-submit="displayRoute(busRoute)">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" id="routeNumber" data-ng-model="busRoute">
+          <label class="mdl-textfield__label route-input" for="routeNumber">enter route ...</label>
+        </div>
+        <button type="submit" name="button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+          <i class="material-icons">add</i>
+        </button>
       </form>
-      <button class="navElement" type="button" name="clearRoutes" data-ng-click="clearRoutes()">clear routes</button>
-      <button class="navElement" type="button" name="mapTheme">map theme</button>
+
+      <button class="navElement nav-button" type="button" name="clearRoutes" data-ng-click="clearRoutes()">clear routes</button>
+
+      <!-- Right aligned menu below button -->
+      <button id="demo-menu-lower-right"
+              class="mdl-button mdl-js-button mdl-button--icon menu-button">
+        <i class="material-icons">more_vert</i>
+      </button>
+
+      <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+          for="demo-menu-lower-right">
+        <li class="mdl-menu__item">Login</li>
+        <li class="mdl-menu__item">Map Theme</li>
+        <li disabled class="mdl-menu__item">Plot Favorites (enabled when logged in)</li>
+      </ul>
+
+      <!-- <button class="navElement" type="button" name="mapTheme">map theme</button>
       <button class="navElement" type="button" name="menuButton">menu button</button>
       <form class="navElement" name="loginForm">
         <label for="username">username</label>
@@ -24,60 +51,36 @@
         <lable for="password">password</lable>
         <input type="text" id="password" required>
         <button type="submit" name="button">login</button>
-      </form>
+      </form> -->
     </nav>
   </header>
 
+  <aside>
+    <table>
+      <thead>
+        <tr>
+          <th>route</th>
+          <th>color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="ng-cloak" data-ng-repeat="busRouteData in busRouteDatas">
+          <td>{{busRouteData.properties.ROUTE}}</td>
+          <td class="colorBox" style="background-color: {{busRouteData.properties.colorCode}}"></td>
+          <td><button type="button" data-ng-click="deleteRoute(busRouteData)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </aside>
+
   <main>
 
-    <aside>
-      <table>
-        <thead>
-          <tr>
-            <th>route</th>
-            <th>color</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="ng-cloak" data-ng-repeat="busRouteData in busRouteDatas">
-            <td>{{busRouteData.properties.ROUTE}}</td>
-            <td class="colorBox" style="background-color: {{busRouteData.properties.colorCode}}"></td>
-            <td><button type="button" data-ng-click="deleteRoute(busRouteData)">Delete</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </aside>
-
-    <map data-ng-controller="MapsController">
-      <leaflet height="100%" width="100%" lf-center="seattle"></leaflet>
-    </map>
+      <map data-ng-controller="MapsController">
+        <leaflet height="100%" width="100%" lf-center="seattle"></leaflet>
+      </map>
 
   </main>
 
   <script src="bundle.js"></script>
 </body>
 </html>
-
-<!--
-test menu button not pressed
-<button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button" data-upgraded=",MaterialButton,MaterialRipple">
-  <i class="material-icons">more_vert</i>
-  <span class="mdl-button__ripple-container"><span class="mdl-ripple is-animating" style="width: 92.5097px; height: 92.5097px; transform: translate(-50%, -50%) translate(19px, 13px);"></span></span></button>
-
-test menu dropdown hidden
-<div class="mdl-menu__container is-upgraded" style="right: 40px; top: 48px; width: 127.703px; height: 208px;"><div class="mdl-menu__outline mdl-menu--bottom-right" style="width: 127.703px; height: 208px;"></div><ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" for="more-button" data-upgraded=",MaterialMenu,MaterialRipple" style="clip: rect(0px 127.703px 0px 127.703px);">
-            <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1" data-upgraded=",MaterialRipple">5.0 Lollipop<span class="mdl-menu__item-ripple-container"><span class="mdl-ripple"></span></span></li>
-            <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1" data-upgraded=",MaterialRipple">4.4 KitKat<span class="mdl-menu__item-ripple-container"><span class="mdl-ripple"></span></span></li>
-            <li disabled="" class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1" data-upgraded=",MaterialRipple">4.3 Jelly Bean<span class="mdl-menu__item-ripple-container"><span class="mdl-ripple"></span></span></li>
-            <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1" data-upgraded=",MaterialRipple">Android History<span class="mdl-menu__item-ripple-container"><span class="mdl-ripple"></span></span></li>
-          </ul></div>
-
-test menu dropdown visible
-<div class="mdl-menu__container is-upgraded is-visible" style="right: 40px; top: 48px; width: 127.703px; height: 208px;"><div class="mdl-menu__outline mdl-menu--bottom-right" style="width: 127.703px; height: 208px;"></div><ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events" for="more-button" data-upgraded=",MaterialMenu,MaterialRipple" style="clip: rect(0px 127.703px 208px 0px);">
-            <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1" data-upgraded=",MaterialRipple" style="transition-delay: 0.00923077s;">5.0 Lollipop<span class="mdl-menu__item-ripple-container"><span class="mdl-ripple"></span></span></li>
-            <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1" data-upgraded=",MaterialRipple" style="transition-delay: 0.0646154s;">4.4 KitKat<span class="mdl-menu__item-ripple-container"><span class="mdl-ripple"></span></span></li>
-            <li disabled="" class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1" data-upgraded=",MaterialRipple" style="transition-delay: 0.12s;">4.3 Jelly Bean<span class="mdl-menu__item-ripple-container"><span class="mdl-ripple"></span></span></li>
-            <li class="mdl-menu__item mdl-js-ripple-effect" tabindex="-1" data-upgraded=",MaterialRipple" style="transition-delay: 0.175385s;">Android History<span class="mdl-menu__item-ripple-container"><span class="mdl-ripple"></span></span></li>
-          </ul></div>
-
--->

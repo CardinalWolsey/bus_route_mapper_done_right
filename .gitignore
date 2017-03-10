@@ -1,5 +1,5 @@
 **/node_modules
-data
-db
-build
+**/data
+**/db
+**/build
 **/.DS_Store
