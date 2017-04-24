@@ -18,6 +18,8 @@
 - move off nav and sidebar styling into own css files
 - do better unit tests ... look at 401 work for that
 
+COLORS:
+	- #E74C3C
 
 # King County Bus Route API
 

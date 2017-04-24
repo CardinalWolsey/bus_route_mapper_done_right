@@ -18,65 +18,19 @@ header {
   justify-content: space-between;
 }
 
-h1 {
-  font-size: 2.99em;
-  font-family: 'Oswald', sans-serif;
-  margin-top: 9px;
-  margin-left: 12px;
-  margin-bottom: 9px;
-}
-
-nav {
-    display: flex;
-    // justify-content: space-between;
-}
-
-.route-form {
-  width: 360px;
-}
-
-.route-input {
-  color: #F2F2F2;
-}
-
-.route-input:after {
-  background-color: #F2F2F2;
-  color: #F2F2F2;
-}
-
-.nav-button {
-  height: 20px;
-  margin-left: 20px;
-}
-
-.menu-button {
-  margin-left: 20px;
-}
-
-
-
 aside {
   width: 240px;
-  height: calc(100% - 73px);
+  height: calc(100% - 82px);
   display: inline-block;
   border-right: 2px;
   border-style: solid;
   border-color: #404040;
+  margin-right: -4px;
 }
 
 main {
   display: inline-block;
-  height: calc(100% - 90px);
-  width: calc(100% - 270px);
-}
-
-map {
-  height: calc(100% - 10px);
+  padding-left: 8px;
+  height: calc(100% - 91px);
   width: calc(100% - 260px);
-  display: inline;
-}
-
-.colorBox {
-  width: 30px;
-  height: 30px;
 }

@@ -21,7 +21,7 @@
   <header>
     <h1>BUS ROUTE MAPPER</h1>
     <nav>
-      <form class="navElement route-form" name="enterRouteNumber" data-ng-submit="displayRoute(busRoute)">
+      <form class="route-form" name="enterRouteNumber" data-ng-submit="displayRoute(busRoute)">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <input class="mdl-textfield__input" type="text" id="routeNumber" data-ng-model="busRoute">
           <label class="mdl-textfield__label route-input" for="routeNumber">enter route ...</label>
@@ -31,7 +31,7 @@
         </button>
       </form>
 
-      <button class="navElement nav-button" type="button" name="clearRoutes" data-ng-click="clearRoutes()">clear routes</button>
+      <button class="nav-button" type="button" name="clearRoutes" data-ng-click="clearRoutes()">clear routes</button>
 
       <!-- Right aligned menu below button -->
       <button id="demo-menu-lower-right"
@@ -46,15 +46,6 @@
         <li disabled class="mdl-menu__item">Plot Favorites (enabled when logged in)</li>
       </ul>
 
-      <!-- <button class="navElement" type="button" name="mapTheme">map theme</button>
-      <button class="navElement" type="button" name="menuButton">menu button</button>
-      <form class="navElement" name="loginForm">
-        <label for="username">username</label>
-        <input type="text" id="username" required>
-        <lable for="password">password</lable>
-        <input type="text" id="password" required>
-        <button type="submit" name="button">login</button>
-      </form> -->
     </nav>
   </header>
 
@@ -62,15 +53,21 @@
     <table>
       <thead>
         <tr>
-          <th>route</th>
-          <th>color</th>
+          <th>ROUTE</th>
+          <th>COLOR</th>
         </tr>
       </thead>
       <tbody>
         <tr class="ng-cloak" data-ng-repeat="busRouteData in busRouteDatas">
-          <td>{{busRouteData.properties.ROUTE}}</td>
-          <td class="colorBox" style="background-color: {{busRouteData.properties.colorCode}}"></td>
-          <td><button type="button" data-ng-click="deleteRoute(busRouteData)">Delete</button></td>
+          <td class="route-label-cell">{{busRouteData.properties.ROUTE}}</td>
+          <td class="color-box-cell">
+            <div class="color-box" style="background-color: {{busRouteData.properties.colorCode}}"></div>
+          </td>
+          <td class="clear-button-cell">
+            <button type="button" class="mdl-button mdl-js-button mdl-button--icon clear-button" data-ng-click="deleteRoute(busRouteData)">
+              <i class="material-icons">clear</i>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
