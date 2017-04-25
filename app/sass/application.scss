@@ -2,6 +2,9 @@
 @import 'leaflet';
 @import 'ng-cloak';
 
+@import './../../material-design-lite/dist/material.min.scss';
+
 @import 'base';
 @import 'nav';
 @import 'aside';
+@import 'main';

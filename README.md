@@ -16,8 +16,13 @@
 - update slugignore
 - make sure all files in /app folder are updated
 - move off nav and sidebar styling into own css files
-- do better unit tests ... look at 401 work for that
+- consider taking away pink fade on add and clear all buttons
 
+COLORS:
+	- #E74C3C
+	- #F2F2F2 ... font color
+	- #404040 ... border color
+	- #3498DB ... its a nice blue for the buttons
 
 # King County Bus Route API
 
