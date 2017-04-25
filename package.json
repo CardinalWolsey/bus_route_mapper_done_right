@@ -1,6 +1,6 @@
 {
   "name": "bus_route_mapper_done_right",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "an API to serve King County Metro Bus Data",
   "main": "server.js",
   "scripts": {
