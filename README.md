@@ -23,6 +23,8 @@ COLORS:
 	- #F2F2F2 ... font color
 	- #404040 ... border color
 	- #3498DB ... its a nice blue for the buttons
+	- #2980B9 ... it's a slightly darker nice blue color.  May make it the standard button color, and the other nice blue could be the highlight color.
+	- #E74C3C ... a red color I want to implement for errors or accents
 
 # King County Bus Route API
 

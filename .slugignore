@@ -2,3 +2,4 @@
 /data
 /db
 /utils
+**/bus_routes.geojson

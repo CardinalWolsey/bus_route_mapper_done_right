@@ -5,7 +5,7 @@ var busRoutes = require(__dirname + '/routes/busdata_routes');
 var authRoutes = require(__dirname + '/routes/users_routes');
 
 process.env.APP_SECRET = process.env.APP_SECRET || 'changemechangemechangeme';
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/busData');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/busData');
 process.env.PORT = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/build'));
