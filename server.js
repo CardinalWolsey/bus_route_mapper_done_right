@@ -14,5 +14,5 @@ app.use('/api', busRoutes);
 app.use('/api', authRoutes);
 
 app.listen(process.env.PORT, function() {
-  console.log('server listening on port ' + process.env.PORT);
+  console.log('server is up and listening on port ' + process.env.PORT);
 });

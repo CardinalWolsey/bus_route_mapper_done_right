@@ -1,7 +1,7 @@
-**/node_modules
-**/data
-**/db
 **/build
-**/.DS_Store
+**/db
 **/material-design-lite
+**/node_modules
+
 **/bus_routes.geojson
+**/.DS_Store

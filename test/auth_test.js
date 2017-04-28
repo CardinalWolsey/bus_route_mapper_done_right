@@ -1,13 +1,11 @@
-//TODO: update file
-
-
 var chai = require('chai');
 var chaihttp = require('chai-http');
 chai.use(chaihttp);
 var expect = chai.expect;
-process.env.MONGO_URL = 'mongodb://localhost/notes_test';
-require(__dirname + '/../server');
 var mongoose = require('mongoose');
+process.env.MONGODB_URI = 'mongodb://localhost/bus_routes_test';
+require(__dirname + '/../server');
+
 var User = require(__dirname + '/../models/user');
 var eatAuth = require(__dirname + '/../lib/eat_auth');
 var httpBasic = require(__dirname + '/../lib/basic_http_authentication');
@@ -28,7 +26,6 @@ describe('httpbasic', function() {
   });
 });
 
-
 describe('auth', function() {
   after(function(done) {
     mongoose.connection.db.dropDatabase(function() {
@@ -48,7 +45,6 @@ describe('auth', function() {
   });
 
   describe('user already in database', function() {
-
     before('generating a token',function(done) {
       var user = new User();
       user.username = 'test';
@@ -62,7 +58,6 @@ describe('auth', function() {
           if (err) return handleError(err, res);
 
           this.token = token;
-          // console.log(this.token);
           done();
         }.bind(this));
       }.bind(this));
@@ -80,7 +75,6 @@ describe('auth', function() {
     });
 
     it('should be able to authenticate with eat auth', function(done) {
-      var token2 = this.token;
       var req = {
         body: {
           token: this.token
@@ -90,12 +84,11 @@ describe('auth', function() {
         }
       };
 
-      console.log(req)
-
       eatAuth(req, {}, function() {
         expect(req.user.username).to.eql('test');
         done();
       });
     });
+    
   });
 });
