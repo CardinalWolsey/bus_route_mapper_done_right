@@ -1,5 +1,3 @@
-//TODO: update file
-
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
@@ -42,11 +40,6 @@ gulp.task('static:dev', function() {
     .pipe(gulp.dest('build/'));
 });
 
-gulp.task('map:dev', function() {
-  gulp.src('app/js/map.js')
-    .pipe(gulp.dest('build/js'));
-});
-
 gulp.task('webpack:dev', function() {
   gulp.src('app/js/entry.js')
     .pipe(webpack({
@@ -68,8 +61,7 @@ gulp.task('css:watch', function() {
   gulp.watch('./app/**/*', ['styles']);
 });
 
-gulp.task('build:dev', ['webpack:dev', 'static:dev', 'sass:dev']);
-
 gulp.task('styles', ['sass:dev', 'static:dev']);
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
 gulp.task('default', ['jshint', 'mocha']);
+gulp.task('build:dev', ['webpack:dev', 'static:dev', 'sass:dev']);

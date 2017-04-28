@@ -1,28 +1,22 @@
-<!-- TODO: update file -->
-
 [![Build Status](https://travis-ci.org/CardinalWolsey/bus_route_mapper_done_right.svg)](https://travis-ci.org/CardinalWolsey/bus_route_mapper_done_right)
-#TODO  
 
+#TODO  
 - enable map themes  
 - display an error message if a route does not exist  
-- menu button that takes user to other pages   
 - build favorites page  
 - build "add favorites button"  
 - build about page  
 - make login work and connect user accounts with favorites  
-- update package.json file
-- review and update LICENSE file
-- update travis.yml
-- update slugignore
-- make sure all files in /app folder are updated
-- move off nav and sidebar styling into own css files
 - consider taking away pink fade on add and clear all buttons
+- write more/better tests
+- enable 'click on map and plot near by routes'
 
 COLORS:
-	- #E74C3C
 	- #F2F2F2 ... font color
 	- #404040 ... border color
 	- #3498DB ... its a nice blue for the buttons
+	- #2980B9 ... it's a slightly darker nice blue color.  May make it the standard button color, and the other nice blue could be the highlight color.
+	- #E74C3C ... a red color I want to implement for errors or accents
 
 # King County Bus Route API
 
@@ -39,7 +33,7 @@ The API takes a GET request for a route number in the King County Metro Transit 
 
 The API also takes a GET request for a location in lng/lat and a radius for the search and returns a geojson array of all the bus routes that come within the given radius of the given location.
 
-A simple front-end to demonstrate the API can be found at http://bus-route-mapper.herokuapp.com
+A simple front-end to demonstrate the API can be found at https://angular-busroute.herokuapp.com/
 
 ## Examples
 ### GET a Bus Route
@@ -47,10 +41,10 @@ A simple front-end to demonstrate the API can be found at http://bus-route-mappe
 Make a GET request to
 
 ```
-http://bus-route-mapper.herokuapp.com/api/busroutes/[bus_route_number]
+https://angular-busroute.herokuapp.com/api/busroutes/[bus_route_number]
 ```
 
-The response will be an array of geojson objects of all the bus routes under King County Metro with that route number.  This will return more than one geojson object in the array, as multiple service types are listed under one route number.  For example, for route 7 there are 7AS, 7AT, 7AZ, and 7AN service types.  The API will return all of these separate routes in the array.
+The response will be an array of one or more geojson objects of all the bus routes under King County Metro with that route number.  This will return one or more geojson object in the array, as multiple service types are listed under one route number.  For example, for route 7 there are 7AS, 7AT, 7AZ, and 7AN service types.  The API will return all of these separate routes in the array.
 
 #### Example Response
 (The geometry property has been suppressed for brevity and clarity)

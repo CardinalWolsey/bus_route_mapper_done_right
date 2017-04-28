@@ -1,6 +1,3 @@
-//TODO: update file
-
-
 var mongoose = require('mongoose');
 
 var busRouteSchema = new mongoose.Schema({
@@ -18,6 +15,6 @@ var busRouteSchema = new mongoose.Schema({
   }
 }, {collection: 'routes'});
 
-busRouteSchema.index({ geometry : '2dsphere' });
+busRouteSchema.index({geometry: '2dsphere'});
 
 module.exports = mongoose.model('busRoute', busRouteSchema);

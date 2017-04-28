@@ -1,4 +1,7 @@
-/test
-/data
-/db
-/utils
+**/app
+**/db
+**/material-design-lite
+**/test
+**/utils
+
+**/bus_routes.geojson
